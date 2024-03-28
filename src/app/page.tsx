@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <main className=" h-full w-full lg:p-[1.5rem] ">
       <Map />
+      
     </main>
   );
 }
