@@ -1,5 +1,5 @@
 'use client'
-
+import axios from 'axios';
 import React, { useEffect,useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, LayersControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -8,8 +8,7 @@ import { Icon } from 'leaflet';
 import { useGeolocation } from '@/hooks/useGeoLocation';
 import { Position } from '@/types';
 import LocationMarker from './LocationMarker';
-import { Button } from './ui/button';
-
+import ListMarker from './ListMarker';
 const defaultPosition:Position=  {
   latitude: 51.505,
   longitude: -0.09
@@ -25,16 +24,19 @@ const icon: Icon = new Icon({
   }
 });
 
-const Map = () => {
+const Map =  () => {
   // const listLocation: ListLocation[] = [];
   const currentPosition = useGeolocation();
   const [position, setPosition] = useState<Position>(defaultPosition);
+
+
   useEffect(() => {
     if (currentPosition) {
       setPosition(currentPosition);
     }
   }, [currentPosition]);
 
+  
 
   return (
     <div className=" flex flex-col w-full h-full">
@@ -44,10 +46,11 @@ const Map = () => {
         className=" w-full h-full relative lg:rounded-[1rem]"
         scrollWheelZoom={true}
       >
-        <TileLayer url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-`}/>
-        
         <LayersControl position="topright">
+        <LayersControl.BaseLayer checked name="MapBox">
+          <TileLayer url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+        `}/>
+          </LayersControl.BaseLayer>
           <LayersControl.BaseLayer checked name="OpenStreetMap">
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -61,6 +64,9 @@ const Map = () => {
             />
           </LayersControl.BaseLayer>
         </LayersControl>
+
+
+      <ListMarker />
       <LocationMarker initialPosition={position}/>
       </MapContainer>
       

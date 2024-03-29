@@ -6,9 +6,8 @@ import Map from "@/components/Index";
 
 export default function Home() {
   return (
-    <main className=" h-full w-full lg:p-[1.5rem] ">
+    <main className=" w-full lg:p-[1.5rem] h-[100vh]">
       <Map />
-      
     </main>
   );
 }
