@@ -1,6 +1,6 @@
 import connectMongoDB from '@/lib/mongodb';
 import { NextResponse } from "next/server";
-import LocationModel from '../../../../models/locationInfo';
+import LocationModel from '../../../models/locationInfo';
 import { LocationInfo } from '@/types';
 
 
@@ -33,7 +33,7 @@ async function handler(req: Request) {
             address,
             category,
         });
-
+        console.log("newLocation", newLocation);
         return NextResponse.json({ success: true, message: 'Location saved successfully' });
 
     } catch (error) {

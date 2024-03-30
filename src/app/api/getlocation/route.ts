@@ -1,5 +1,5 @@
 import connectMongoDB from '@/lib/mongodb';
-import LocationModel from '../../../../models/locationInfo';
+import LocationModel from '../../../models/locationInfo';
 import { NextResponse } from "next/server";
 import { LocationInfo } from '@/types';
 async function handler(req: Request) {
@@ -11,9 +11,9 @@ async function handler(req: Request) {
                 },
                 status: 500,
               }); 
-        }
+        }      
         await connectMongoDB();
-        
+
         const locations: LocationInfo[] = await LocationModel.find();
         return new NextResponse(JSON.stringify(locations), {
           headers: {

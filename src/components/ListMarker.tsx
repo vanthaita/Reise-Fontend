@@ -4,9 +4,11 @@ import axios from 'axios';
 import { LocationInfoMarker } from '@/types';
 import { Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
+import { LocationInfo } from '@/types';
+
 
 const icon = new Icon({
-    iconUrl: '/images/user.png',
+    iconUrl: '/images/marker-icon.png',
     iconSize: [20, 35],
     iconAnchor: [10, 35]
 });
@@ -18,19 +20,23 @@ const ListMarker = () => {
         const getListLocation = async () => {
             try {
                 const response = await axios.get('http://localhost:3000/api/getlocation');
-                setListLocation(response.data.locations);
+                console.log(response.data);
+                setListLocation(response.data);
+
             } catch (error) {
                 console.error('Error fetching locations:', error);
             }
         };
         getListLocation();
     }, []); 
-      
+
+
+    console.log(listLocation)
 
     return (
         <>
-            {listLocation.length > 0 && listLocation.map((location, index) => (
-                <Marker key={location._id} position={[location.latitude, location.longitude]} icon={icon}>
+            {listLocation.length > 0 &&   listLocation.map((location, index) => (
+                <Marker key={location} position={[location.lat, location.lng]} icon={icon}>
                     <Popup>
                         <div>
                             <h3>{location.localName}</h3>
