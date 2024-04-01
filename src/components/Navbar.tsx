@@ -22,13 +22,20 @@ const Navbar = () => {
           <p className='text-xl font-bold'>Reise</p>
         </Link>
           <div className={`flex-col lg:flex-row lg:space-x-4 ${isOpen ? 'hidden' : 'hidden'} lg:flex`}>
-            <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Blog</p>
-            <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Earn</p>
-            <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Collection</p>
-            <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Explore</p>
-            <Link href="/create">
-              <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Create</p>
+            <Link href="/map">
+              <p className='text-sm font-medium hover:text-blue-500'>Map</p>
             </Link>
+            <Link href="/blog">
+              <p className='text-sm font-medium hover:text-blue-500'>Blog</p>
+            </Link>
+            <Link href="/earn">
+              <p className='text-sm font-medium hover:text-blue-500'>Earn</p>
+            </Link>
+            {/* <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Collection</p> */}
+            <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Explore</p>
+            {/* <Link href="/create">
+              <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Create</p>
+            </Link> */}
           </div>
         </div>        
         </div>
@@ -37,22 +44,25 @@ const Navbar = () => {
           <Wallet />
         </div>
       </div>
-      <div className={`flex flex-col p-4 space-y-2 bg-white border-t border-gray-200 lg:hidden ${isOpen ? 'block' : 'hidden'}`}>
+      <div className={`flex flex-col p-4 space-y-2 bg-white border-t border-gray-200 lg:hidden w-full ${isOpen ? ' block' : 'hidden'}`}>
+        <Link href="/map">
+          <p className='text-sm font-medium hover:text-blue-500'>Map</p>
+        </Link>
         <Link href="/blog">
           <p className='text-sm font-medium hover:text-blue-500'>Blog</p>
         </Link>
         <Link href="/earn">
           <p className='text-sm font-medium hover:text-blue-500'>Earn</p>
         </Link>
-        <Link href="/collection">
+        {/* <Link href="/collection">
           <p className='text-sm font-medium hover:text-blue-500'>Collection</p>
-        </Link>
+        </Link> */}
         <Link href="/explore">
           <p className='text-sm font-medium hover:text-blue-500'>Explore</p>
         </Link>
-        <Link href="/create">
+        {/* <Link href="/create">
           <p className='text-sm font-medium hover:text-blue-500'>Create</p>
-        </Link>
+        </Link> */}
       </div>
     </nav>
   );

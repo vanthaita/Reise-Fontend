@@ -37,8 +37,8 @@ const ListMarker = () => {
         <>
             {listLocation.length > 0 &&   listLocation.map((location, index) => (
                 <Marker key={location} position={[location.lat, location.lng]} icon={icon}>
-                    <Popup>
-                        <div>
+                    <Popup closeOnClick >
+                        <div className=' w-1/2 h-1/2'>
                             <h3>{location.localName}</h3>
                             <p>{location.address}</p>
                             <p>{location.description}</p>

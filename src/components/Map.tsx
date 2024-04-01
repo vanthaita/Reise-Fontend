@@ -9,6 +9,8 @@ import { useGeolocation } from '@/hooks/useGeoLocation';
 import { Position } from '@/types';
 import LocationMarker from './LocationMarker';
 import ListMarker from './ListMarker';
+
+
 const defaultPosition:Position=  {
   latitude: 51.505,
   longitude: -0.09
