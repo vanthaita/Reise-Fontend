@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils";
 import DappKitProvider from "@/components/DappKitProvider";
+import Footer from "@/components/Footer";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -26,7 +27,10 @@ export default function RootLayout({
         )}>
         <DappKitProvider>
           <Navbar />
+          <div className="">
+            </div>
           {children}
+          <Footer />
         </DappKitProvider>
         </body>
       </html>

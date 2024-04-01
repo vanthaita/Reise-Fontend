@@ -7,6 +7,7 @@ const page = () => {
             <h1 className='font-bold text-3xl text-black mb-4'>Coming soon</h1>
           </div>
     </div>
+
   )
 }
     

@@ -3,7 +3,7 @@ import React from 'react';
 import { Wallet } from './ui/Wallet';
 import { useCurrentWallet } from '@mysten/dapp-kit';
 import Link from "next/link";
-
+import Image from 'next/image';
 const Navbar = () => {
   const wallet = useCurrentWallet();
   const [isOpen, setIsOpen] = React.useState(false);
@@ -19,7 +19,11 @@ const Navbar = () => {
         </button>
           <div className='flex gap-5  items-center'>
         <Link href="/">
-          <p className='text-xl font-bold'>Reise</p>
+          <div className=' flex flex-row justify-center items-center'>
+          <Image src="https://www.svgrepo.com/show/317127/travel.svg" 
+              className="h-12 mr-3 sm:h-9" alt="Landwind Logo" width={30} height={30} />
+              <p className='text-xl font-bold'>Reise</p>
+          </div>
         </Link>
           <div className={`flex-col lg:flex-row lg:space-x-4 ${isOpen ? 'hidden' : 'hidden'} lg:flex`}>
             <Link href="/map">

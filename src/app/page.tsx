@@ -3,7 +3,7 @@ import React from "react";
 import Map from "@/components/Index";
 const Home = () => {
   return (
-    <main className="w-full lg:p-[1.5rem] h-[100vh] flex items-center justify-center ">
+    <main className="w-full lg:p-[1.5rem] h-[105vh] flex items-center justify-center ">
       <div className="text-center lg:mb-[20px] flex flex-col">
         <h1 className="text-2xl lg:text-5xl font-bold text-black mb-4">
           Embark on Your <span className="bg-gradient-to-r from-orange-500 via-indigo-500 to-green-500 text-transparent bg-clip-text mr-1 ml-1">Journey</span> with Reise
