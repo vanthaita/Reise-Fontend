@@ -1,0 +1,47 @@
+[
+    {
+        "localName": "Đại học Quốc gia Thành phố Hồ Chí Minh",
+        "lat": 10.762622,
+        "lng": 106.682571,
+        "image": "https://example.com/university.jpg",
+        "description": "Đại học Quốc gia Thành phố Hồ Chí Minh, viết tắt là ĐHQG-HCM, là một trong những trường đại học lớn nhất và hàng đầu tại Việt Nam.",
+        "address": "Số 235 đường Nguyễn Văn Cừ, phường 4, quận 5, Thành phố Hồ Chí Minh",
+        "category": "Trường đại học"
+    },
+    {
+        "localName": "Bảo tàng Lịch sử Việt Nam",
+        "lat": 10.780476,
+        "lng": 106.699414,
+        "image": "https://example.com/museum.jpg",
+        "description": "Bảo tàng Lịch sử Việt Nam là một trong những bảo tàng lịch sử lớn nhất tại Thành phố Hồ Chí Minh.",
+        "address": "Số 2 Nguyễn Bỉnh Khiêm, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
+        "category": "Bảo tàng"
+    },
+    {
+        "localName": "Công viên 23 Tháng 9",
+        "lat": 10.775159,
+        "lng": 106.686748,
+        "image": "https://example.com/park.jpg",
+        "description": "Công viên 23 Tháng 9 là một trong những công viên lớn và đẹp tại Thành phố Hồ Chí Minh, nơi mà người dân thường đến để thư giãn và vui chơi vào cuối tuần.",
+        "address": "Số 80 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh",
+        "category": "Công viên"
+    },
+    {
+        "localName": "Nhà thờ Đức Bà",
+        "lat": 10.779840,
+        "lng": 106.699200,
+        "image": "https://example.com/church.jpg",
+        "description": "Nhà thờ Đức Bà là một trong những công trình kiến trúc nổi tiếng và đẹp nhất tại Thành phố Hồ Chí Minh.",
+        "address": "Số 1 Công xã Paris, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
+        "category": "Nhà thờ"
+    },
+    {
+        "localName": "Chợ Bến Thành",
+        "lat": 10.772261,
+        "lng": 106.698848,
+        "image": "https://example.com/market.jpg",
+        "description": "Chợ Bến Thành là một trong những điểm tham quan nổi tiếng và là trung tâm thương mại lớn nhất tại Thành phố Hồ Chí Minh.",
+        "address": "Chợ Bến Thành, Lê Lợi, Bến Thành, Quận 1, Thành phố Hồ Chí Minh",
+        "category": "Chợ"
+    }
+]

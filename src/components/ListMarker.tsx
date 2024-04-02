@@ -1,53 +1,45 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { LocationInfoMarker } from '@/types';
-import { Marker, Popup } from 'react-leaflet';
-import { Icon } from 'leaflet';
-import { LocationInfo } from '@/types';
+// 'use client'
+// import React, { useState } from 'react';
+// import 'mapbox-gl/dist/mapbox-gl.css'; // Import Mapbox styles
+// import { Marker, Popup } from 'react-map-gl'; // Import required Mapbox components
+// import locations from '@/models/locations.json'; // Import location data
+
+// // const icon = new Icon({
+// //     iconUrl: '/images/marker-icon.png',
+// //     iconSize: [20, 35],
+// //     iconAnchor: [10, 35]
+// // });
 
 
-const icon = new Icon({
-    iconUrl: '/images/marker-icon.png',
-    iconSize: [20, 35],
-    iconAnchor: [10, 35]
-});
+// const ListMarker = () => {
+//     const [clickedLocation, setClickedLocation] = useState(null);
 
-const ListMarker = () => {
-    const [listLocation, setListLocation] = useState<any[]>([]);
+//     const handleMarkerClick = (location: any) => {
+//         return <>
+//             <div className=' w-96 h-96 bg-black text-white' >Hello world!</div>
+//         </>
+     
+//     };
 
-    useEffect(() => {
-        const getListLocation = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/getlocation');
-                console.log(response.data);
-                setListLocation(response.data);
+//     return (
+//         <>
+//        {locations.length > 0 &&
+//         locations.map((location, index) => (
+//           <Marker key={index} latitude={location.lat} longitude={location.lng}>
+//             <button onClick={() => handleMarkerClick(location)}>
+//               <div className="marker-icon">{/* Your marker icon here */}</div>
+//             </button>
+           
+//               <Popup
+//                     anchor="top"
+//                     closeOnClick={false}
+//                     onClose={() => setClickedLocation(null)} longitude={0} latitude={0}              >
+//                 {location.localName}
+//               </Popup>
+//           </Marker>
+//         ))}
+//         </>
+//     );
+// };
 
-            } catch (error) {
-                console.error('Error fetching locations:', error);
-            }
-        };
-        getListLocation();
-    }, []); 
-
-
-    console.log(listLocation)
-
-    return (
-        <>
-            {listLocation.length > 0 &&   listLocation.map((location, index) => (
-                <Marker key={location} position={[location.lat, location.lng]} icon={icon}>
-                    <Popup closeOnClick >
-                        <div className=' w-1/2 h-1/2'>
-                            <h3>{location.localName}</h3>
-                            <p>{location.address}</p>
-                            <p>{location.description}</p>
-                        </div>
-                    </Popup>
-                </Marker>
-            ))}
-        </>
-    );
-};
-
-export default ListMarker;
+// export default ListMarker;

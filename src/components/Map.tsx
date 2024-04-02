@@ -1,79 +1,69 @@
 'use client'
-import axios from 'axios';
-import React, { useEffect,useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, LayersControl } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import L from 'leaflet';
-import { Icon } from 'leaflet';
+import React, { useRef, useEffect, useState } from 'react';
+import mapboxgl, { Marker } from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { useGeolocation } from '@/hooks/useGeoLocation';
-import { Position } from '@/types';
-import LocationMarker from './LocationMarker';
-import ListMarker from './ListMarker';
+import locations from '@/models/locations.json'; // Adjust the path accordingly
+
+interface Location {
+  localName: string;
+  lat: number;
+  lng: number;
+  image: string;
+  description: string;
+  address: string;
+  category: string;
+}
+
+const Map: React.FC = () => {
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [viewport, setViewport] = useState({ latitude: 10.762622, longitude: 106.682571 }); // Default center
+  const position = useGeolocation();
+  const markers: Marker[] = [];
+  const markerRef = useRef<Marker | null>(null);
+  useEffect(() => {
+    if (mapContainerRef.current) {
+      mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
+      const map = new mapboxgl.Map({
+        container: mapContainerRef.current,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [viewport.longitude, viewport.latitude],
+        zoom: 10,
+      });
+
+      markerRef.current = new mapboxgl.Marker().setLngLat([viewport.longitude, viewport.latitude]).addTo(map);
 
 
-const defaultPosition:Position=  {
-  latitude: 51.505,
-  longitude: -0.09
-};
+      locations.forEach((location: Location) => {
+        const marker = new mapboxgl.Marker()
+          .setLngLat([location.lng, location.lat])
+          .setPopup(new mapboxgl.Popup().setHTML(`<h3>${location.localName}</h3><p>${location.description}</p>`))
+          .addTo(map);
+        markers.push(marker);
+      });
 
-const icon: Icon = new Icon({
-  iconUrl: '/images/user.png',
-  iconSize: [20, 35],
-  iconAnchor: [10, 35],
-  iconShape: { 
-    type: 'circle',
-    coords: [10, 10, 10]
-  }
-});
-
-const Map =  () => {
-  // const listLocation: ListLocation[] = [];
-  const currentPosition = useGeolocation();
-  const [position, setPosition] = useState<Position>(defaultPosition);
-
+      return () => {
+        map.remove();
+        markers.forEach(marker => marker.remove());
+      };
+    }
+  }, [mapContainerRef.current, viewport.latitude, viewport.longitude]);
 
   useEffect(() => {
-    if (currentPosition) {
-      setPosition(currentPosition);
+    if (position?.latitude && position?.longitude) {
+      setViewport({
+        latitude: position.latitude,
+        longitude: position.longitude,
+      });
+      if (markerRef.current) {
+        markerRef.current.setLngLat([position.longitude, position.latitude]);
+      }
+    } else {
+      console.error('Error getting geolocation');
     }
-  }, [currentPosition]);
+  }, [position]);
 
-  
-
-  return (
-    <div className=" flex flex-col w-full h-full">
-      <MapContainer
-        center={[position.latitude, position.longitude]}
-        zoom={10}
-        className=" w-full h-full relative lg:rounded-[1rem]"
-        scrollWheelZoom={true}
-      >
-        <LayersControl position="topright">
-        <LayersControl.BaseLayer checked name="MapBox">
-          <TileLayer url={`https://api.mapbox.com/styles/v1/mapbox/streets-v12/tiles/256/{z}/{x}/{y}?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-        `}/>
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer checked name="OpenStreetMap">
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-          </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name="Esri Satellite">
-            <TileLayer
-              attribution='&copy; <a href="http://www.esri.com/about/maps/">Esri</a>'
-              url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
-            />
-          </LayersControl.BaseLayer>
-        </LayersControl>
-
-
-      <ListMarker />
-      <LocationMarker initialPosition={position}/>
-      </MapContainer>
-      
-    </div>
-  );
+  return <div className="w-full h-full rounded-sm" ref={mapContainerRef} />;
 };
 
 export default Map;

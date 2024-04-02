@@ -4,6 +4,7 @@ import { Wallet } from './ui/Wallet';
 import { useCurrentWallet } from '@mysten/dapp-kit';
 import Link from "next/link";
 import Image from 'next/image';
+
 const Navbar = () => {
   const wallet = useCurrentWallet();
   const [isOpen, setIsOpen] = React.useState(false);
