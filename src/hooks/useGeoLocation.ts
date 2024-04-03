@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-
 import { Position, PositionError } from '@/types';
-
 export function useGeolocation(): Position | null {
     const [position, setPosition] = useState<Position | null>(null);
     const [error, setError] = useState<PositionError | null>(null);

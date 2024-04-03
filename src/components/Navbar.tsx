@@ -49,7 +49,7 @@ const Navbar = () => {
           <Wallet />
         </div>
       </div>
-      <div className={`flex flex-col p-4 space-y-2 bg-white border-t border-gray-200 lg:hidden w-full ${isOpen ? ' block' : 'hidden'}`}>
+      <div className={`flex flex-col p-4 space-y-2 bg-white border-t border-gray-200 lg:hidden w-full ${isOpen ? ' block' : 'hidden'} fixed z-[99999] `}>
         <Link href="/map">
           <p className='text-sm font-medium hover:text-blue-500'>Map</p>
         </Link>

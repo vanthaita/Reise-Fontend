@@ -1,10 +1,12 @@
 'use client'
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl, { Marker } from 'mapbox-gl';
+import {Marker as Reactmarker} from 'react-map-gl';  
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useGeolocation } from '@/hooks/useGeoLocation';
-import locations from '@/models/locations.json'; // Adjust the path accordingly
-
+import locations from '@/models/locations.json'; 
+import { Button } from './ui/button';
+import Detail from './Detail';
 interface Location {
   localName: string;
   lat: number;
@@ -17,10 +19,12 @@ interface Location {
 
 const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [viewport, setViewport] = useState({ latitude: 10.762622, longitude: 106.682571 }); // Default center
+  const [viewport, setViewport] = useState({ latitude: 10.762622, longitude: 106.682571 });
   const position = useGeolocation();
   const markers: Marker[] = [];
   const markerRef = useRef<Marker | null>(null);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   useEffect(() => {
     if (mapContainerRef.current) {
       mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
@@ -30,16 +34,22 @@ const Map: React.FC = () => {
         center: [viewport.longitude, viewport.latitude],
         zoom: 10,
       });
-
-      markerRef.current = new mapboxgl.Marker().setLngLat([viewport.longitude, viewport.latitude]).addTo(map);
+      const marker = new mapboxgl.Marker({ color: '#1e1e1e' })
+      .setLngLat([viewport.longitude, viewport.latitude])
+      .setPopup(new mapboxgl.Popup().setHTML('<h3>You are here!</h3>')) // Add popup with message
+      .addTo(map);
 
 
       locations.forEach((location: Location) => {
         const marker = new mapboxgl.Marker()
           .setLngLat([location.lng, location.lat])
-          .setPopup(new mapboxgl.Popup().setHTML(`<h3>${location.localName}</h3><p>${location.description}</p>`))
-          .addTo(map);
-        markers.push(marker);
+          .addTo(map)
+          .getElement();
+
+        marker.addEventListener('click', () => {
+          setSelectedLocation(location);
+          setIsDrawerVisible(true);
+        });
       });
 
       return () => {
@@ -63,7 +73,19 @@ const Map: React.FC = () => {
     }
   }, [position]);
 
-  return <div className="w-full h-full rounded-sm" ref={mapContainerRef} />;
+  return <>
+  <div className=' w-full h-full'>
+    <div   className="w-full h-full rounded-sm" ref={mapContainerRef} />
+
+    {selectedLocation && (
+            <Detail
+              selectedLocation={selectedLocation}
+              isDrawerVisible={isDrawerVisible}
+              setIsDrawerVisible={setIsDrawerVisible}
+            />
+          )}
+  </div>
+  </>
 };
 
 export default Map;
