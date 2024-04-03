@@ -15,6 +15,8 @@ interface Location {
   description: string;
   address: string;
   category: string;
+  collectionName: string;
+
 }
 
 const Map: React.FC = () => {

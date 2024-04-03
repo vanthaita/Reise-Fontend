@@ -5,9 +5,24 @@ import { Button } from './ui/button';
 import { calculateDistance,convertDistance } from '../functions/calculateDistance'; 
 import { useGeolocation } from '../hooks/useGeoLocation'; 
 import { Position } from '../types'; 
-
+import {
+	useCurrentAccount,
+	useCurrentWallet,
+	useSignAndExecuteTransactionBlock,
+} from '@mysten/dapp-kit';
+import { createMintNftTxnBlock } from '@/lib/moveCall';
+interface Location {
+  localName: string;
+  lat: number;
+  lng: number;
+  image: string;
+  description: string;
+  address: string;
+  category: string;
+  collectionName: string;
+}
 interface DropDetailProps {
-  selectedLocation: any;
+  selectedLocation: Location;
   isDrawerVisible: boolean;
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -17,6 +32,9 @@ const Detail: React.FC<DropDetailProps> = ({
   isDrawerVisible,
   setIsDrawerVisible,
 }) => {
+  const account = useCurrentAccount();
+  const wallet = useCurrentWallet();
+  const { mutate: signAndExecuteTransactionBlock } = useSignAndExecuteTransactionBlock();
   const [distance, setDistance] = useState<string | undefined>(undefined); // Initialize distance state
   const positionCurrent: Position | null = useGeolocation();
   const latitude: number = positionCurrent?.latitude ?? 0;
@@ -41,10 +59,66 @@ const Detail: React.FC<DropDetailProps> = ({
   const handleCloseDrawer = () => {
     setIsDrawerVisible(false);
   };
-
+  console.log(selectedLocation);
   const handleStopPropagation = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
+  // const txb = createMintNftTxnBlock(
+  //   {
+  //     _name: selectedLocation.localName,
+  //     _description: selectedLocation.description,
+  //     _url: selectedLocation.image,
+  //     _lat: selectedLocation.lat,
+  //     _lng: selectedLocation.lng,
+  //     _category: "ADMIN",
+  //     _creator: selectedLocation.creator,
+  //     _address_local: selectedLocation.address,
+  //     _collection_name: "HCM",
+  //   },
+  // );
+  const handleTransaction = async () => {
+    if (!wallet.isConnected) return;
+
+    const { address, category, description, image, lat, lng, localName } = selectedLocation;
+
+    const localNameBytes = new TextEncoder().encode(localName);
+    const descriptionBytes = new TextEncoder().encode(description);
+    const imageBytes = new TextEncoder().encode(image);
+    const latBytes = new TextEncoder().encode(lat.toString());
+    const lngBytes = new TextEncoder().encode(lng.toString());
+    const addressBytes = new TextEncoder().encode(address);
+    const categoryBytes = new TextEncoder().encode(category);
+    const collectionBytes = new TextEncoder().encode(selectedLocation.collectionName);
+
+    const txb = createMintNftTxnBlock({
+        _name: localNameBytes,
+        _description: descriptionBytes,
+        _url: imageBytes,
+        _lat: latBytes,
+        _lng: lngBytes,
+        _category: categoryBytes,
+        _creator: account?.address || "",
+        _address_local: addressBytes,
+        _collection_name: collectionBytes,
+    });
+
+    try {
+        const res = await signAndExecuteTransactionBlock({
+            transactionBlock: txb,
+            chain: "sui:devnet",
+        }, {
+            onError: () => {
+                console.log("error");
+            },
+            onSuccess: (result) => {
+                console.log("executed transaction block", result);
+            }
+        });
+        console.log("Congrats! Your NFT is minted!");
+    } catch (err) {
+        console.log(err);
+    }
+}
 
   return (
     <div className="fixed inset-0 flex items-center justify-center">
@@ -71,7 +145,7 @@ const Detail: React.FC<DropDetailProps> = ({
         <div className="flex items-center flex-col gap-2 p-4">
           <div className=' rounded-xl w-[20rem] h-[14rem] mb-2'>
             <Image 
-              src="/images/images.png"
+              src='/images/images.png'
               alt='image'
               width={288}
               height={224}
@@ -84,8 +158,9 @@ const Detail: React.FC<DropDetailProps> = ({
           </div>
           <div className=' flex flex-row justify-between items-center gap-2 w-full p-4'>
             <p className=' text-black'>{distance}</p>
-            <Button className=' w-[30%]'>Collect</Button>
-
+               <Button className=' w-[30%]' onClick={handleTransaction}>
+                Collect
+              </Button>
           </div>
         </div>
       </div>
