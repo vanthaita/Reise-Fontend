@@ -29,11 +29,27 @@ const Detail: React.FC<DropDetailProps> = ({
   const account = useCurrentAccount();
   const wallet = useCurrentWallet();
   const { mutate: signAndExecuteTransactionBlock } = useSignAndExecuteTransactionBlock();
-  const [distance, setDistance] = useState<string | undefined>(undefined); // Initialize distance state
+  const [distance, setDistance] = useState<string | undefined>(undefined); 
   const positionCurrent: Position | null = useGeolocation();
   const [checkIsDistance, setCheckIsDistance] = useState(false);
+  const [checkIsColleted, setcheckIsColleted] = useState(false);
   const latitude: number = positionCurrent?.latitude ?? 0;
   const longitude: number = positionCurrent?.longitude ?? 0;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.post("http://localhost:3000/api/getlocation", {
+          address: account?.address,
+          locationId: selectedLocation.locationId
+        });
+        console.log(res);
+        setcheckIsColleted(res.data);
+      } catch (err) {
+        console.error("Error:", err);
+      }
+    };
+    fetchData(); 
+  }, [selectedLocation]);
   useEffect(() => {
     if (positionCurrent && selectedLocation) {
       const distance: number = calculateDistance(
@@ -150,15 +166,21 @@ const Detail: React.FC<DropDetailProps> = ({
           </div>
           <div className=' flex flex-row justify-between items-center gap-2 w-full p-4'>
             <p className=' text-black'>{distance}</p>
-              {checkIsDistance 
-              
-              ? (wallet.isConnected && <Button className=' w-[30%]' onClick={handleTransaction}>
-                Collect
-              </Button>) : 
-                <Button className=' w-[50%]'>
-                  Go closer to collect
-                </Button>  
-              }
+            {
+            !checkIsColleted ? (
+              checkIsDistance && wallet.isConnected ? (
+                <Button className='w-[30%]' onClick={handleTransaction}>
+                  Collect
+                </Button>
+              ) : (
+                <Button className='w-[50%]'>
+                  {!checkIsDistance ? "Go closer to collect" : "Collected"}
+                </Button>
+              )
+            ) : (
+              <Button>Collected</Button>
+            )
+          }
           </div>
         </div>
       </div>

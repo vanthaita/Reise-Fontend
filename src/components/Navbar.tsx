@@ -37,7 +37,9 @@ const Navbar = () => {
               <p className='text-sm font-medium hover:text-blue-500'>Earn</p>
             </Link>
             {/* <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Collection</p> */}
+            {/* <Link href="/explore">
             <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Explore</p>
+            </Link> */}
             {/* <Link href="/create">
               <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Create</p>
             </Link> */}
@@ -62,9 +64,9 @@ const Navbar = () => {
         {/* <Link href="/collection">
           <p className='text-sm font-medium hover:text-blue-500'>Collection</p>
         </Link> */}
-        <Link href="/explore">
+        {/* <Link href="/explore">
           <p className='text-sm font-medium hover:text-blue-500'>Explore</p>
-        </Link>
+        </Link> */}
         {/* <Link href="/create">
           <p className='text-sm font-medium hover:text-blue-500'>Create</p>
         </Link> */}

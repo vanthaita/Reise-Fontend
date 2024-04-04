@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, use } from 'react';
 import mapboxgl, { Marker } from 'mapbox-gl';
 import {Marker as Reactmarker} from 'react-map-gl';  
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -64,6 +64,9 @@ const Map: React.FC = () => {
       console.error('Error getting geolocation');
     }
   }, [position]);
+
+
+
 
   return <>
   <div className=' w-full h-full'>

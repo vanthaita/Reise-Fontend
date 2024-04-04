@@ -1,5 +1,5 @@
 import connectMongoDB from '@/lib/mongodb';
-import AccountDataModel, { AccountData } from '@/models/accountData'; // Assuming AccountData is exported from the model file
+import AccountDataModel from '@/models/accountData'; 
 import { accountData } from '@/types';
 import { NextResponse } from 'next/server';
 
@@ -22,7 +22,7 @@ async function handler(req: Request, res: Response) {
             headers: {
                 "Content-Type": "application/json",
             },
-            status: 200, // OK status code
+            status: 200, 
         });
 
     } 

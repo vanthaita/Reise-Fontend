@@ -1,0 +1,22 @@
+[
+    {
+        "CollectionId": "1",
+        "collectionName" : "Ho Chi Minh City Collection", 
+        "locationId": [
+                "4",
+                "3",
+                "5"
+        ],
+        "description": "Explore, collect",
+        "image": "http://example.com/images/"
+    },
+    {
+        "CollectionId": "2",
+        "collectionName" : "Ho Chi Minh City Collection 2", 
+        "locationId": [
+                "2"
+        ],
+        "description": "Explore, collect",
+        "image": "http://example.com/images/"
+    }
+]

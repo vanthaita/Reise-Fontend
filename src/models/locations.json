@@ -8,7 +8,7 @@
         "description": "Đại học Quốc gia Thành phố Hồ Chí Minh, viết tắt là ĐHQG-HCM, là một trong những trường đại học lớn nhất và hàng đầu tại Việt Nam.",
         "address": "Số 235 đường Nguyễn Văn Cừ, phường 4, quận 5, Thành phố Hồ Chí Minh",
         "category": "Trường đại học",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
     },
     {
         "locationId": "2",
@@ -19,7 +19,7 @@
         "description": "Bảo tàng Lịch sử Việt Nam là một trong những bảo tàng lịch sử lớn nhất tại Thành phố Hồ Chí Minh.",
         "address": "Số 2 Nguyễn Bỉnh Khiêm, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Bảo tàng",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
     },
     {
         "locationId": "3",
@@ -31,7 +31,7 @@
         "description": "Công viên 23 Tháng 9 là một trong những công viên lớn và đẹp tại Thành phố Hồ Chí Minh, nơi mà người dân thường đến để thư giãn và vui chơi vào cuối tuần.",
         "address": "Số 80 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Công viên",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
     },
     {
         "locationId": "4",
@@ -43,7 +43,7 @@
         "description": "Nhà thờ Đức Bà là một trong những công trình kiến trúc nổi tiếng và đẹp nhất tại Thành phố Hồ Chí Minh.",
         "address": "Số 1 Công xã Paris, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Nhà thờ",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
     },
     {
         "locationId": "5",
@@ -55,7 +55,7 @@
         "description": "Chợ Bến Thành là một trong những điểm tham quan nổi tiếng và là trung tâm thương mại lớn nhất tại Thành phố Hồ Chí Minh.",
         "address": "Chợ Bến Thành, Lê Lợi, Bến Thành, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Chợ",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
     },
     {
         "locationId": "6",
@@ -67,7 +67,7 @@
         "description": "Nhà hát Thành phố Hồ Chí Minh, hay Nhà hát Lớn Thành phố Hồ Chí Minh, là một trong những cung điện nghệ thuật nổi tiếng nhất tại Việt Nam.",
         "address": "Số 7 Lê Thánh Tôn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Nhà hát",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
       },
       {
         "locationId": "7",
@@ -79,7 +79,7 @@
         "description": "Khu phố Tây Bùi Viện là một điểm đến phổ biến cho du khách quốc tế tại Thành phố Hồ Chí Minh, với nhiều quán bar, nhà hàng và các hoạt động vui chơi giải trí.",
         "address": "Đường Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Khu phố",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
       },
       {
         "locationId": "8",
@@ -91,6 +91,6 @@
         "description": "Bảo tàng Mỹ thuật là một trong những bảo tàng nghệ thuật hàng đầu tại Thành phố Hồ Chí Minh, với bộ sưu tập đa dạng từ các thế kỷ và nền văn hóa khác nhau.",
         "address": "Số 97A Phó Đức Chính, Phường Nguyễn Thái Bình, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Bảo tàng",
-        "collectionName": "HCM"
+        "collectionName": "Ho Chi Minh City Collection"
       }
 ]
