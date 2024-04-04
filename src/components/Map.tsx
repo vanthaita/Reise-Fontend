@@ -7,17 +7,7 @@ import { useGeolocation } from '@/hooks/useGeoLocation';
 import locations from '@/models/locations.json'; 
 import { Button } from './ui/button';
 import Detail from './Detail';
-interface Location {
-  localName: string;
-  lat: number;
-  lng: number;
-  image: string;
-  description: string;
-  address: string;
-  category: string;
-  collectionName: string;
-
-}
+import { Location } from '@/types';
 
 const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -77,7 +67,7 @@ const Map: React.FC = () => {
 
   return <>
   <div className=' w-full h-full'>
-    <div   className="w-full h-full rounded-sm" ref={mapContainerRef} />
+    <div className="w-full h-full rounded-sm" ref={mapContainerRef} />
 
     {selectedLocation && (
             <Detail

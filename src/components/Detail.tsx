@@ -5,22 +5,16 @@ import { Button } from './ui/button';
 import { calculateDistance,convertDistance } from '../functions/calculateDistance'; 
 import { useGeolocation } from '../hooks/useGeoLocation'; 
 import { Position } from '../types'; 
+import { Location } from '@/types';
 import {
+  ConnectButton,
 	useCurrentAccount,
 	useCurrentWallet,
 	useSignAndExecuteTransactionBlock,
 } from '@mysten/dapp-kit';
 import { createMintNftTxnBlock } from '@/lib/moveCall';
-interface Location {
-  localName: string;
-  lat: number;
-  lng: number;
-  image: string;
-  description: string;
-  address: string;
-  category: string;
-  collectionName: string;
-}
+import axios from 'axios'
+
 interface DropDetailProps {
   selectedLocation: Location;
   isDrawerVisible: boolean;
@@ -37,21 +31,33 @@ const Detail: React.FC<DropDetailProps> = ({
   const { mutate: signAndExecuteTransactionBlock } = useSignAndExecuteTransactionBlock();
   const [distance, setDistance] = useState<string | undefined>(undefined); // Initialize distance state
   const positionCurrent: Position | null = useGeolocation();
+  const [checkIsDistance, setCheckIsDistance] = useState(false);
   const latitude: number = positionCurrent?.latitude ?? 0;
   const longitude: number = positionCurrent?.longitude ?? 0;
-  console.log(latitude, longitude);
   useEffect(() => {
-    if (positionCurrent) {
+    if (positionCurrent && selectedLocation) {
       const distance: number = calculateDistance(
         latitude,
         longitude,
         selectedLocation.lat,
         selectedLocation.lng
       );
-      setDistance(convertDistance(distance));
+      const distanceToKm: string = convertDistance(distance); 
+      if (!isNaN(parseFloat(distanceToKm))) {
+        const distanceInKm: number = parseFloat(distanceToKm);
+        if (distanceInKm < 0.03) { 
+          setCheckIsDistance(true);
+        } else {
+          setCheckIsDistance(false);
+        }
+        setDistance(distanceToKm);
+      } else {
+        console.error('Distance is not a valid number.'); 
+      }
     }
   }, [positionCurrent, selectedLocation]);
-  console.log(distance);
+
+
   if (!selectedLocation || !isDrawerVisible) {
     return null;
   }
@@ -59,47 +65,25 @@ const Detail: React.FC<DropDetailProps> = ({
   const handleCloseDrawer = () => {
     setIsDrawerVisible(false);
   };
-  console.log(selectedLocation);
   const handleStopPropagation = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
-  // const txb = createMintNftTxnBlock(
-  //   {
-  //     _name: selectedLocation.localName,
-  //     _description: selectedLocation.description,
-  //     _url: selectedLocation.image,
-  //     _lat: selectedLocation.lat,
-  //     _lng: selectedLocation.lng,
-  //     _category: "ADMIN",
-  //     _creator: selectedLocation.creator,
-  //     _address_local: selectedLocation.address,
-  //     _collection_name: "HCM",
-  //   },
-  // );
   const handleTransaction = async () => {
     if (!wallet.isConnected) return;
+    
 
-    const { address, category, description, image, lat, lng, localName } = selectedLocation;
-
-    const localNameBytes = new TextEncoder().encode(localName);
-    const descriptionBytes = new TextEncoder().encode(description);
-    const imageBytes = new TextEncoder().encode(image);
-    const latBytes = new TextEncoder().encode(lat.toString());
-    const lngBytes = new TextEncoder().encode(lng.toString());
-    const addressBytes = new TextEncoder().encode(address);
-    const categoryBytes = new TextEncoder().encode(category);
-    const collectionBytes = new TextEncoder().encode(selectedLocation.collectionName);
+    const { address, category, description, image, lat, lng, localName, collectionName } = selectedLocation;
 
     const txb = createMintNftTxnBlock({
-        _name: localNameBytes,
-        _description: descriptionBytes,
-        _url: imageBytes,
-        _lat: latBytes,
-        _lng: lngBytes,
-        _category: categoryBytes,
+        _name: localName,
+        _description: description,
+        _url: image,
+        _lat: lat.toString(),
+        _lng: lng.toString(),
+        _category: category,
         _creator: account?.address || "",
-        _address_local: addressBytes,
-        _collection_name: collectionBytes,
+        _address_local: address,
+        _collection_name: collectionName,
     });
 
     try {
@@ -110,15 +94,23 @@ const Detail: React.FC<DropDetailProps> = ({
             onError: () => {
                 console.log("error");
             },
-            onSuccess: (result) => {
-                console.log("executed transaction block", result);
+            onSuccess: async (result) => {
+              try {
+                const res = await axios.post("http://localhost:3000/api/location", {
+                    address: account?.address,
+                    locationId: selectedLocation.locationId
+                }) 
+              } catch (err) {
+                console.error(err);
+              }
+
             }
         });
-        console.log("Congrats! Your NFT is minted!");
+        res;
     } catch (err) {
         console.log(err);
     }
-}
+} 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center">
@@ -158,9 +150,15 @@ const Detail: React.FC<DropDetailProps> = ({
           </div>
           <div className=' flex flex-row justify-between items-center gap-2 w-full p-4'>
             <p className=' text-black'>{distance}</p>
-               <Button className=' w-[30%]' onClick={handleTransaction}>
+              {checkIsDistance 
+              
+              ? (wallet.isConnected && <Button className=' w-[30%]' onClick={handleTransaction}>
                 Collect
-              </Button>
+              </Button>) : 
+                <Button className=' w-[50%]'>
+                  Go closer to collect
+                </Button>  
+              }
           </div>
         </div>
       </div>

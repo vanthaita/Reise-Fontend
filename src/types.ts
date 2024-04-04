@@ -8,24 +8,30 @@ export interface PositionError {
     message: string;
 }
 
-export interface LocationInfo  {
+export interface Location {
+    locationId: string;
     localName: string;
     lat: number;
     lng: number;
     image: string;
     description: string;
-    creator: string;
     address: string;
     category: string;
-}
-export interface LocationInfoMarker  {
-    localName: string;
-    lat: number;
-    lng: number;
-    image: string;
-    description: string;
-    creator: string;
+    collectionName: string;
+  
+  }
+export interface accountData  {
     address: string;
-    category: string;
-    _id: string;
+    locationId: string[];
 }
+// export interface LocationInfoMarker  {
+//     localName: string;
+//     lat: number;
+//     lng: number;
+//     image: string;
+//     description: string;
+//     creator: string;
+//     address: string;
+//     category: string;
+//     _id: string;
+// }

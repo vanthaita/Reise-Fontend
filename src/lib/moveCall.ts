@@ -1,13 +1,12 @@
 import { TransactionBlock } from "@mysten/sui.js/transactions";
 
-export function createMintNftTxnBlock({ _name, _description, _url, _lat, _lng, _category, _creator, _address_local, _collection_name} : { _name: Uint8Array, _description: Uint8Array, _url: Uint8Array, _lat: Uint8Array, _lng: Uint8Array, _category: Uint8Array, _creator: string, _address_local: Uint8Array, _collection_name: Uint8Array}) {
+export function createMintNftTxnBlock({ _name, _description, _url, _lat, _lng, _category, _creator, _address_local, _collection_name} : { _name: string, _description: string, _url: string, _lat: string, _lng: string, _category: string, _creator: string, _address_local: string, _collection_name: string}) {
   const txb = new TransactionBlock();
   
   const contractAddress =
-    "0x31fd50b46dab531e790238b3e34c4bc72c500d280cd12a025197ef1b1a9e94c1";
+    "0xcc447980a499a3306e5d8e902b6a07aefe2081c602f219cbdb5e1aa2d6751962";
   const contractModule = "REISE_NFT";
   const contractMethod = "mint_reise_nft";
-
   const nftName = `${_name}`;
   const nftDescription = `${_description}`;
   const nftImgUrl = `${_url}`
@@ -22,13 +21,13 @@ export function createMintNftTxnBlock({ _name, _description, _url, _lat, _lng, _
     target: `${contractAddress}::${contractModule}::${contractMethod}`,
     arguments: [
       txb.pure(nftName),
-      txb.pure(nftAddressLocal),
+      txb.pure(nftDescription),
+      txb.pure(nftImgUrl),
       txb.pure(nftLat),
       txb.pure(nftLng),
-      txb.pure(nftDescription),
       txb.pure(nftCategory),
       txb.pure(nftCreator),
-      txb.pure(nftImgUrl),
+      txb.pure(nftAddressLocal),
       txb.pure(nftCollectionName),
     ],
   });

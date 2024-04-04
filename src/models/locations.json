@@ -1,5 +1,6 @@
 [
     {
+        "locationId": "1",
         "localName": "Đại học Quốc gia Thành phố Hồ Chí Minh",
         "lat": 10.762622,
         "lng": 106.682571,
@@ -10,6 +11,7 @@
         "collectionName": "HCM"
     },
     {
+        "locationId": "2",
         "localName": "Bảo tàng Lịch sử Việt Nam",
         "lat": 10.780476,
         "lng": 106.699414,
@@ -20,6 +22,8 @@
         "collectionName": "HCM"
     },
     {
+        "locationId": "3",
+        
         "localName": "Công viên 23 Tháng 9",
         "lat": 10.775159,
         "lng": 106.686748,
@@ -30,6 +34,8 @@
         "collectionName": "HCM"
     },
     {
+        "locationId": "4",
+
         "localName": "Nhà thờ Đức Bà",
         "lat": 10.779840,
         "lng": 106.699200,
@@ -40,6 +46,8 @@
         "collectionName": "HCM"
     },
     {
+        "locationId": "5",
+
         "localName": "Chợ Bến Thành",
         "lat": 10.772261,
         "lng": 106.698848,
@@ -48,5 +56,41 @@
         "address": "Chợ Bến Thành, Lê Lợi, Bến Thành, Quận 1, Thành phố Hồ Chí Minh",
         "category": "Chợ",
         "collectionName": "HCM"
-    }
+    },
+    {
+        "locationId": "6",
+
+        "localName": "Nhà hát Thành phố Hồ Chí Minh",
+        "lat": 10.776572,
+        "lng": 106.700895,
+        "image": "https://example.com/opera_house.jpg",
+        "description": "Nhà hát Thành phố Hồ Chí Minh, hay Nhà hát Lớn Thành phố Hồ Chí Minh, là một trong những cung điện nghệ thuật nổi tiếng nhất tại Việt Nam.",
+        "address": "Số 7 Lê Thánh Tôn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
+        "category": "Nhà hát",
+        "collectionName": "HCM"
+      },
+      {
+        "locationId": "7",
+
+        "localName": "Khu phố Tây Bùi Viện",
+        "lat": 10.769963,
+        "lng": 106.693891,
+        "image": "https://example.com/bui_vien_street.jpg",
+        "description": "Khu phố Tây Bùi Viện là một điểm đến phổ biến cho du khách quốc tế tại Thành phố Hồ Chí Minh, với nhiều quán bar, nhà hàng và các hoạt động vui chơi giải trí.",
+        "address": "Đường Bùi Viện, Phường Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh",
+        "category": "Khu phố",
+        "collectionName": "HCM"
+      },
+      {
+        "locationId": "8",
+
+        "localName": "Bảo tàng Mỹ thuật",
+        "lat": 10.776919,
+        "lng": 106.703511,
+        "image": "https://example.com/art_museum.jpg",
+        "description": "Bảo tàng Mỹ thuật là một trong những bảo tàng nghệ thuật hàng đầu tại Thành phố Hồ Chí Minh, với bộ sưu tập đa dạng từ các thế kỷ và nền văn hóa khác nhau.",
+        "address": "Số 97A Phó Đức Chính, Phường Nguyễn Thái Bình, Quận 1, Thành phố Hồ Chí Minh",
+        "category": "Bảo tàng",
+        "collectionName": "HCM"
+      }
 ]
