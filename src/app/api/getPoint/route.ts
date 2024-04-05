@@ -26,11 +26,7 @@ async function handler(req: Request) {
                 status: 500,
               }); 
         }
-
-        const locationIdArray = Array.isArray(currentAccount.locationId) ? 
-                    currentAccount.locationId : 
-                    [currentAccount.locationId];
-        return new NextResponse(JSON.stringify(locationIdArray), {
+        return new NextResponse(JSON.stringify(currentAccount.point), {
           headers: {
               "Content-Type": "application/json",
           },
@@ -47,6 +43,4 @@ async function handler(req: Request) {
           });
     }
 }
-
-
 export {handler as POST}

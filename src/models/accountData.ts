@@ -12,6 +12,6 @@ const accountDataSchema: Schema = new Schema({
     point: { type: Number}
 });
 
-const AccountData = mongoose.models.Location || mongoose.model<AccountData>("Location", accountDataSchema);
+const AccountData = mongoose.models.AccountData || mongoose.model<AccountData>("AccountData", accountDataSchema);
 
 export default AccountData;

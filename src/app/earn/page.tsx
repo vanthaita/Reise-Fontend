@@ -2,7 +2,9 @@
 import CollectionSection from '@/app/earn/components/CollectionSection';
 import React, {  useState } from 'react';
 import collection from "@/models/collection.json"
+import { useCurrentAccount } from '@mysten/dapp-kit';
 const Page = () => {
+    const account = useCurrentAccount();
     return (
         <>
             <div className='lg:flex w-full h-1/2 items-center justify-center'>

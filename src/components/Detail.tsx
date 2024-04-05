@@ -1,5 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { calculateDistance,convertDistance } from '../functions/calculateDistance'; 
@@ -14,7 +16,7 @@ import {
 } from '@mysten/dapp-kit';
 import { createMintNftTxnBlock } from '@/lib/moveCall';
 import axios from 'axios'
-
+import { ReloadIcon } from "@radix-ui/react-icons"
 interface DropDetailProps {
   selectedLocation: Location;
   isDrawerVisible: boolean;
@@ -32,7 +34,8 @@ const Detail: React.FC<DropDetailProps> = ({
   const [distance, setDistance] = useState<string | undefined>(undefined); 
   const positionCurrent: Position | null = useGeolocation();
   const [checkIsDistance, setCheckIsDistance] = useState(false);
-  const [checkIsColleted, setcheckIsColleted] = useState(false);
+  const [checkIsCollected, setcheckIsCollected] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
   const latitude: number = positionCurrent?.latitude ?? 0;
   const longitude: number = positionCurrent?.longitude ?? 0;
   useEffect(() => {
@@ -43,13 +46,14 @@ const Detail: React.FC<DropDetailProps> = ({
           locationId: selectedLocation.locationId
         });
         console.log(res);
-        setcheckIsColleted(res.data);
+        setcheckIsCollected(res.data);
       } catch (err) {
         console.error("Error:", err);
       }
     };
     fetchData(); 
-  }, [selectedLocation]);
+  }, [positionCurrent,selectedLocation]);
+
   useEffect(() => {
     if (positionCurrent && selectedLocation) {
       const distance: number = calculateDistance(
@@ -58,10 +62,11 @@ const Detail: React.FC<DropDetailProps> = ({
         selectedLocation.lat,
         selectedLocation.lng
       );
+      console.log(distance);
       const distanceToKm: string = convertDistance(distance); 
       if (!isNaN(parseFloat(distanceToKm))) {
         const distanceInKm: number = parseFloat(distanceToKm);
-        if (distanceInKm < 0.03) { 
+        if (distanceInKm > 0.03) { 
           setCheckIsDistance(true);
         } else {
           setCheckIsDistance(false);
@@ -71,7 +76,7 @@ const Detail: React.FC<DropDetailProps> = ({
         console.error('Distance is not a valid number.'); 
       }
     }
-  }, [positionCurrent, selectedLocation]);
+  }, [selectedLocation]);
 
 
   if (!selectedLocation || !isDrawerVisible) {
@@ -84,6 +89,7 @@ const Detail: React.FC<DropDetailProps> = ({
   const handleStopPropagation = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
+
   const handleTransaction = async () => {
     if (!wallet.isConnected) return;
     
@@ -103,12 +109,13 @@ const Detail: React.FC<DropDetailProps> = ({
     });
 
     try {
+        setisLoading(true);
         const res = await signAndExecuteTransactionBlock({
             transactionBlock: txb,
             chain: "sui:devnet",
         }, {
             onError: () => {
-                console.log("error");
+              console.log("error");
             },
             onSuccess: async (result) => {
               try {
@@ -116,10 +123,12 @@ const Detail: React.FC<DropDetailProps> = ({
                     address: account?.address,
                     locationId: selectedLocation.locationId
                 }) 
+                toast.success("Transaction successful!");
+                setIsDrawerVisible(false);
+                setisLoading(false);                
               } catch (err) {
                 console.error(err);
               }
-
             }
         });
         res;
@@ -167,20 +176,26 @@ const Detail: React.FC<DropDetailProps> = ({
           <div className=' flex flex-row justify-between items-center gap-2 w-full p-4'>
             <p className=' text-black'>{distance}</p>
             {
-            !checkIsColleted ? (
-              checkIsDistance && wallet.isConnected ? (
-                <Button className='w-[30%]' onClick={handleTransaction}>
-                  Collect
-                </Button>
+              !checkIsCollected ? (
+                checkIsDistance && wallet.isConnected ? (
+                  <Button className='w-[30%]' onClick={handleTransaction}>
+                    Collect
+                  </Button>
+                ) : (
+                  <Button className='w-[50%]'>
+                    {!checkIsDistance ? "Go closer to collect" : "Collected"}
+                  </Button>
+                )
               ) : (
-                <Button className='w-[50%]'>
-                  {!checkIsDistance ? "Go closer to collect" : "Collected"}
-                </Button>
+                (isLoading ?  
+                  <Button disabled>
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                    Please wait
+                  </Button> : 
+                  <Button>Collected</Button> 
+                )
               )
-            ) : (
-              <Button>Collected</Button>
-            )
-          }
+            }
           </div>
         </div>
       </div>

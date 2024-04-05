@@ -27,6 +27,7 @@ async function handler(req: Request) {
                 status: 500,
               }); 
         }
+
         const checkIsColleted = currentAccount.locationId.includes(locationId);
         return new NextResponse((checkIsColleted), {
           headers: {
@@ -45,6 +46,5 @@ async function handler(req: Request) {
           });
     }
 }
-
 
 export {handler as POST}

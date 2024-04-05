@@ -14,8 +14,11 @@ async function handler(req: Request, res: Response) {
       if (!currentAccount) {
         const newAccount = await AccountDataModel.create({
           address,
+          locationId,
+          point: 0,
         });
         }
+
         currentAccount.locationId.push(locationId);
         await currentAccount.save(); 
         return new NextResponse("success", {
@@ -24,7 +27,6 @@ async function handler(req: Request, res: Response) {
             },
             status: 200, 
         });
-
     } 
   } catch (error) {
     console.error("Error:", error);

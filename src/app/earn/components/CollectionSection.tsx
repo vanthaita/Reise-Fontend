@@ -20,6 +20,9 @@ const CollectionSection = ({ CollectionName, description, image, CollectionId }:
         router.push(`/earn/${CollectionId}`);
     }
 
+    const handleGetRewards = () => {
+            
+    }
     return (
         <div className='bg-white-300 p-4 rounded-md shadow-md flex flex-col gap-5 lg:h-[80%] lg:w-[24rem] h-[20rem] w-[350px] '>
             <div className=' flex flex-col justify-center items-center'>
@@ -35,7 +38,7 @@ const CollectionSection = ({ CollectionName, description, image, CollectionId }:
                 className=' h-full w-full '
             />
             </div>
-            <Button className=' bg-black text-white'>Rewards</Button>
+            <Button className=' bg-black text-white' onClick={handleGetRewards}>Rewards</Button>
         </div>
     );
 };

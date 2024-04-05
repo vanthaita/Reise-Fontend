@@ -1,24 +1,43 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wallet } from './ui/Wallet';
-import { useCurrentWallet } from '@mysten/dapp-kit';
+import { useCurrentAccount, useCurrentWallet } from '@mysten/dapp-kit';
 import Link from "next/link";
 import Image from 'next/image';
+import axios from 'axios';
 
 const Navbar = () => {
-  const wallet = useCurrentWallet();
+  const account = useCurrentAccount();
   const [isOpen, setIsOpen] = React.useState(false);
 
+  const [point, setPoint] = useState<number>();
+
+  useEffect(() => {
+    const fetchPoint = async () => {
+      try {
+        const res = await axios.post("http://localhost:3000/api/getPoint", {
+          address: account?.address
+        })
+
+        setPoint(parseFloat(res.data));
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchPoint();
+  }, [account?.address])
+  
+  
   return (
     <nav className='relative bg-white z-30 '>
-      <div className='flex items-center justify-between h-14 px-4 lg:px-6'>
+      <div className='flex items-center justify-between h-[4.2rem] px-4 lg:px-6'>
         <div className=' flex flex-row gap-5 justify-center items-center'>
         <button onClick={() => setIsOpen(!isOpen)} className='lg:hidden'>
             <svg className='w-6 h-6' fill='none' strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' viewBox='0 0 24 24' stroke='currentColor'>
               <path d={isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16m-7 6h7'} />
             </svg>
         </button>
-          <div className='flex gap-5  items-center'>
+          <div className='flex gap-5 items-center'>
         <Link href="/">
           <div className=' flex flex-row justify-center items-center'>
           <Image src="https://www.svgrepo.com/show/317127/travel.svg" 
@@ -47,7 +66,10 @@ const Navbar = () => {
         </div>        
         </div>
 
-        <div className='flex items-center rounded-xl'>
+        <div className='flex items-center rounded-xl flex-row gap-2'>
+          {account?.address && <p className=' font-medium text-sm'>
+            {point} Point
+          </p>}
           <Wallet />
         </div>
       </div>
