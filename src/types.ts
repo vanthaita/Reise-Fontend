@@ -23,6 +23,7 @@ export interface Location {
 export interface accountData  {
     address: string;
     locationId: string[];
+    point: number;
 }
 // export interface LocationInfoMarker  {
 //     localName: string;

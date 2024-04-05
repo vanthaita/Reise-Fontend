@@ -26,10 +26,8 @@ const Page = ({ params }: { params: any }) => {
 
     const collectionId = params.collectionID;
     const filteredCollection = collection.filter(item => item.CollectionId === collectionId);
-    const locationIds = filteredCollection.map(item => item.locationId).flat(); 
+    const locationIds = filteredCollection.map(item => item.locationId).flat();
     const filteredLocations = location.filter(item => locationIds.includes(item.locationId));
-
-
     
     return (
         <>
@@ -59,7 +57,7 @@ const Page = ({ params }: { params: any }) => {
                                 alt='image'
                                 width={256}
                                 height={192}
-                                className=' rounded-xl'
+                                className=' rounded-xl w-full h-full'
                             />
                         </div>
 

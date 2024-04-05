@@ -1,10 +1,10 @@
 'use client'
 import CollectionSection from '@/app/earn/components/CollectionSection';
-import React, {  useState } from 'react';
+import React from 'react';
 import collection from "@/models/collection.json"
-import { useCurrentAccount } from '@mysten/dapp-kit';
+
 const Page = () => {
-    const account = useCurrentAccount();
+
     return (
         <>
             <div className='lg:flex w-full h-1/2 items-center justify-center'>
@@ -17,20 +17,20 @@ const Page = () => {
             </div>
 
             <div className='grid lg:mx-6 w-full h-full lg:grid-cols-3 grid-rows-3 justify-center'>
-                {
-                    collection.map((collection, index) => {
-                        return (
-                            <CollectionSection 
+                {collection.map((collectionItem, index) => {
+                    return (
+                        <CollectionSection
                             key={index}
-                            CollectionId={collection.CollectionId}
-                            CollectionName={collection.collectionName}
-                            description={collection.description} image={collection.image}
-                            />
-                            )
-                        })
-                }
-            
+                            CollectionId={collectionItem.CollectionId}
+                            CollectionName={collectionItem.collectionName}
+                            description={collectionItem.description}
+                            image={collectionItem.image}
+                            point={collectionItem.point}
+                        />
+                    )
+                })}
             </div>
+
         </>
     );
 };

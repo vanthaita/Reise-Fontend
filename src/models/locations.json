@@ -1,6 +1,6 @@
 [
     {
-        "locationId": "1",
+        "locationId": "4c8c296a99dc23a9c16fe154eeaefa10",
         "localName": "Đại học Quốc gia Thành phố Hồ Chí Minh",
         "lat": 10.762622,
         "lng": 106.682571,
@@ -11,7 +11,7 @@
         "collectionName": "Ho Chi Minh City Collection"
     },
     {
-        "locationId": "2",
+        "locationId": "bf2320df5132c1ce47738efdf1909e0d",
         "localName": "Bảo tàng Lịch sử Việt Nam",
         "lat": 10.780476,
         "lng": 106.699414,
@@ -22,8 +22,7 @@
         "collectionName": "Ho Chi Minh City Collection"
     },
     {
-        "locationId": "3",
-        
+        "locationId": "0c3e30549ecc931ed517eba3b5309c73",
         "localName": "Công viên 23 Tháng 9",
         "lat": 10.775159,
         "lng": 106.686748,
@@ -34,8 +33,7 @@
         "collectionName": "Ho Chi Minh City Collection"
     },
     {
-        "locationId": "4",
-
+        "locationId": "948f6c3bce5c289d5129d1cccb04a8fa",
         "localName": "Nhà thờ Đức Bà",
         "lat": 10.779840,
         "lng": 106.699200,
@@ -46,7 +44,7 @@
         "collectionName": "Ho Chi Minh City Collection"
     },
     {
-        "locationId": "5",
+        "locationId": "507197090b5c6e67c46ca6502130bbba",
         "localName": "Chợ Bến Thành",
         "lat": 10.772261,
         "lng": 106.698848,
@@ -57,8 +55,7 @@
         "collectionName": "Ho Chi Minh City Collection"
     },
     {
-        "locationId": "6",
-
+        "locationId": "f9dbc9c9f07f99e4fe574eb717ef96bc",
         "localName": "Nhà hát Thành phố Hồ Chí Minh",
         "lat": 10.776572,
         "lng": 106.700895,
@@ -69,8 +66,7 @@
         "collectionName": "Ho Chi Minh City Collection"
       },
       {
-        "locationId": "7",
-
+        "locationId": "112a0795ad79ad0b5418df71b2844717",
         "localName": "Khu phố Tây Bùi Viện",
         "lat": 10.769963,
         "lng": 106.693891,
@@ -81,8 +77,7 @@
         "collectionName": "Ho Chi Minh City Collection"
       },
       {
-        "locationId": "8",
-
+        "locationId": "a1dcad4d4b9c16764989ec934b525b6c",
         "localName": "Bảo tàng Mỹ thuật",
         "lat": 10.776919,
         "lng": 106.703511,

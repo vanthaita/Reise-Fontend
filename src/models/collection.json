@@ -1,22 +1,25 @@
 [
     {
-        "CollectionId": "1",
+        "CollectionId": "48b6b2bac25fb02a6b51b30e3356d0f7",
         "collectionName" : "Ho Chi Minh City Collection", 
         "locationId": [
-                "4",
-                "3",
-                "5"
+                "bf2320df5132c1ce47738efdf1909e0d",
+                "0c3e30549ecc931ed517eba3b5309c73"
         ],
         "description": "Explore, collect",
-        "image": "http://example.com/images/"
+        "image": "http://example.com/images/",
+        "point": 100
     },
     {
-        "CollectionId": "2",
+        "CollectionId": "a423021ad936b8693717102b57fe65e8",
         "collectionName" : "Ho Chi Minh City Collection 2", 
         "locationId": [
-                "2"
+                "2507197090b5c6e67c46ca6502130bbba",
+                "a1dcad4d4b9c16764989ec934b525b6c"
         ],
         "description": "Explore, collect",
-        "image": "http://example.com/images/"
+        "image": "http://example.com/images/",
+        "point": 50
+
     }
 ]

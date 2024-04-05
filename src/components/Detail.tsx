@@ -66,7 +66,7 @@ const Detail: React.FC<DropDetailProps> = ({
       const distanceToKm: string = convertDistance(distance); 
       if (!isNaN(parseFloat(distanceToKm))) {
         const distanceInKm: number = parseFloat(distanceToKm);
-        if (distanceInKm > 0.03) { 
+        if (distanceInKm <= 0.03) { 
           setCheckIsDistance(true);
         } else {
           setCheckIsDistance(false);
