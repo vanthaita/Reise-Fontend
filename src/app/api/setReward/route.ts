@@ -20,15 +20,20 @@ async function handler(req: Request) {
           }); 
         }
 
-        
-        currentAccount.receivedRewardsId.push(CollectionId);
-        await currentAccount.save(); 
-        return new NextResponse("success", {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            status: 200, 
-        });
+        const existingReward = await AccountDataModel.findOne({
+            address,
+            locationId: { $in: [CollectionId] }
+          });
+          if (!existingReward) {
+            currentAccount.receivedRewardsId.push(CollectionId);
+            await currentAccount.save(); 
+            return new NextResponse("success", {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                status: 200, 
+            });
+        }
     } 
   } catch (error) {
     console.error("Error:", error);

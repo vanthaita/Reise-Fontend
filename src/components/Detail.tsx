@@ -77,7 +77,6 @@ const Detail: React.FC<DropDetailProps> = ({
     }
   }, [latitude, longitude, positionCurrent, selectedLocation]);
 
-  
   console.log(selectedLocation);
   console.log(distance)
   if (!selectedLocation || !isDrawerVisible) {
@@ -135,7 +134,7 @@ const Detail: React.FC<DropDetailProps> = ({
 } 
   console.log("done");
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <div className="fixed inset-0 flex items-center justify-center mt-16">
       <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-sm flex flex-col" onClick={handleStopPropagation}>
         <div className="p-4 flex justify-between items-center">
           <div className='flex flex-col justify-center'>
@@ -172,22 +171,19 @@ const Detail: React.FC<DropDetailProps> = ({
           </div>
           <div className=' flex flex-row justify-between items-center gap-2 w-full p-4'>
             <p className=' text-black'>{distance}</p>
-            {
-              !checkIsCollected ? (
-                checkIsDistance && wallet.isConnected ? (
-                  <Button className='w-[30%]' onClick={handleTransaction}>
-                    Collect
-                  </Button>
-                ) : (
-                  <Button className='w-[50%]'>
-                    {!checkIsDistance ? "Go closer to collect" : "Collected"}
-                  </Button>
-                )
+            {wallet.isConnected ? (
+              checkIsCollected ? (
+                <Button disabled>Collected</Button>
+              ) : checkIsDistance ? (
+                <Button className='w-[30%]' onClick={handleTransaction}>
+                  Collect
+                </Button>
               ) : (
-                
-                  <Button>Collected</Button> 
+                <Button className='w-[50%]'>Go closer to collect</Button>
               )
-            }
+            ) : (
+              <Button disabled>Connect your wallet!</Button>
+            )}
           </div>
         </div>
       </div>

@@ -19,14 +19,21 @@ async function handler(req: Request, res: Response) {
           receivedRewardsId,
         });
         }
-        currentAccount.locationId.push(locationId);
-        await currentAccount.save(); 
+        const existingLocation = await AccountDataModel.findOne({
+          address,
+          locationId: { $in: [locationId] }
+        });
+        if (!existingLocation) {
+          // Add locationId to the array if it doesn't exist
+          currentAccount.locationId.push(locationId);
+          await currentAccount.save(); 
         return new NextResponse("success", {
             headers: {
                 "Content-Type": "application/json",
             },
             status: 200, 
         });
+      }
     } 
   } catch (error) {
     console.error("Error:", error);

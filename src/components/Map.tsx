@@ -13,6 +13,7 @@ const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [viewport, setViewport] = useState({ latitude: 10.762622, longitude: 106.682571 });
   const position = useGeolocation();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const markers: Marker[] = [];
   const markerRef = useRef<Marker | null>(null);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
@@ -32,6 +33,8 @@ const Map: React.FC = () => {
       .addTo(map);
 
 
+
+
       locations.forEach((location: Location) => {
         const marker = new mapboxgl.Marker()
           .setLngLat([location.lng, location.lat])
@@ -49,38 +52,37 @@ const Map: React.FC = () => {
         markers.forEach(marker => marker.remove());
       };
     }
-  }, [mapContainerRef.current, viewport.latitude, viewport.longitude]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [viewport.latitude, viewport.longitude]);
 
-  useEffect(() => {
-    if (position?.latitude && position?.longitude) {
-      setViewport({
-        latitude: position.latitude,
-        longitude: position.longitude,
-      });
-      if (markerRef.current) {
-        markerRef.current.setLngLat([position.longitude, position.latitude]);
+    const handleGeolocationClick = () => {
+      if (position?.latitude && position?.longitude) {
+        setViewport({
+          latitude: position.latitude,
+          longitude: position.longitude,
+        });
+      } else {
+        console.error('Error getting geolocation');
       }
-    } else {
-      console.error('Error getting geolocation');
-    }
-  }, [position]);
+    };
 
-
-
-
+  
   return <>
-  <div className=' w-full h-full'>
-    <div className="w-full h-full rounded-sm" ref={mapContainerRef} />
-
+  <div className='w-full h-full relative'>
+    <div className="w-full h-full rounded-sm relative" ref={mapContainerRef} />
+    <div className="absolute top-4 right-4 z-[9998]">
+      <Button onClick={handleGeolocationClick}>Position</Button>
+    </div>
     {selectedLocation && (
-            <Detail
-              selectedLocation={selectedLocation}
-              isDrawerVisible={isDrawerVisible}
-              setIsDrawerVisible={setIsDrawerVisible}
-            />
-          )}
+      <Detail
+        selectedLocation={selectedLocation}
+        isDrawerVisible={isDrawerVisible}
+        setIsDrawerVisible={setIsDrawerVisible}
+      />
+    )}
   </div>
-  </>
+</>
+
 };
 
 export default Map;
