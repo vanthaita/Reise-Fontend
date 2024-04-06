@@ -1,26 +1,25 @@
 import connectMongoDB from '@/lib/mongodb';
 import AccountDataModel from '@/models/accountData'; 
-import { AccountData } from '@/types';
 import { NextResponse } from 'next/server';
-
+import { AccountData } from '@/types';
 async function handler(req: Request, res: Response) {
   try {
     await connectMongoDB();
     if (req.method === 'POST') {
       const body = await req.json();
-      const { address, point } = body as AccountData;
+      const { address, locationId } = body as AccountData;
 
       const currentAccount = await AccountDataModel.findOne({ address }); 
+      const receivedRewardsId: string[] = [];
       if (!currentAccount) {
-        return new NextResponse(JSON.stringify({ error: 'Not exist account' }), {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            status: 500,
-          }); 
-    }
-
-        currentAccount.point = currentAccount.point + point;
+        const newAccount = await AccountDataModel.create({
+          address,
+          locationId,
+          point: 0,
+          receivedRewardsId,
+        });
+        }
+        currentAccount.locationId.push(locationId);
         await currentAccount.save(); 
         return new NextResponse("success", {
             headers: {

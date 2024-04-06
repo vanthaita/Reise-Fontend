@@ -5,16 +5,15 @@ import { Button } from '../../../components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import axios from 'axios';
-import collection from '@/models/collection.json';
-
 type Props = {
     CollectionId: string,
     CollectionName: string,
     description: string,
     image: string,
-    point: number
+    point: number,
+    locationId: string[]
 }
-const CollectionSection = ({ CollectionName, description, image, CollectionId, point }: Props) => {
+const CollectionSection = ({ CollectionName, description, image, CollectionId, point, locationId }: Props) => {
     const router = useRouter();
     const [selectedLCollection, setSelectedLocation] = useState<string>();
     const account = useCurrentAccount();
@@ -32,26 +31,25 @@ const CollectionSection = ({ CollectionName, description, image, CollectionId, p
             }
         };
         fetchData();
-        // Doi nguoc lai
-        const filteredLocations = collection.filter((collectionItem) =>
-            collectedLocation?.every((id) => collectionItem.locationId.includes(id))
-        );
-
-        const allCollectionsIncluded = filteredLocations.length === collection.length;
-        setCheckallCollectionsIncluded(allCollectionsIncluded);
     }, [account?.address]);
     
-    
-
-    console.log(checkallCollectionsIncluded);
     const handleRewards = async () => {
-        if(!checkallCollectionsIncluded) return console.log("Can't receive Rewards");
+        const checkallCollectionsIncludedIDs = locationId.every(id => {
+            collectedLocation?.includes(id);
+        })
+
+        if(checkallCollectionsIncluded) return;
         try {
-            const req = await axios.post("http://localhost:3000/api/setPoint", {
+            const res = await axios.post("http://localhost:3000/api/setPoint", {
                 address: account?.address,
                 point: point
             })
-            console.log(req.data);
+            const response = await axios.post("http://localhost:3000/api/setReward", {
+                address: account?.address,
+                CollectionId: CollectionId
+            })
+            console.log(response.data);
+            console.log(res.data);
         } catch (err) {
             console.log(err);
         }   

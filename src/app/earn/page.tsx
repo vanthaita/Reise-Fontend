@@ -26,6 +26,7 @@ const Page = () => {
                             description={collectionItem.description}
                             image={collectionItem.image}
                             point={collectionItem.point}
+                            locationId={collectionItem.locationId}
                         />
                     )
                 })}

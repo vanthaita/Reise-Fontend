@@ -25,7 +25,7 @@ const Navbar = () => {
       }
     }
     fetchPoint();
-  }, [account?.address])
+  }, [])
   
   
   return (
@@ -68,7 +68,7 @@ const Navbar = () => {
 
         <div className='flex items-center rounded-xl flex-row gap-2'>
           {account?.address && <p className=' font-medium text-sm'>
-            {point} Point
+            { point === 0 ? point : 0} Point
           </p>}
           <Wallet />
         </div>

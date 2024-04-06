@@ -35,7 +35,6 @@ const Detail: React.FC<DropDetailProps> = ({
   const positionCurrent: Position | null = useGeolocation();
   const [checkIsDistance, setCheckIsDistance] = useState(false);
   const [checkIsCollected, setcheckIsCollected] = useState(false);
-  const [isLoading, setisLoading] = useState(false);
   const latitude: number = positionCurrent?.latitude ?? 0;
   const longitude: number = positionCurrent?.longitude ?? 0;
   useEffect(() => {
@@ -52,7 +51,7 @@ const Detail: React.FC<DropDetailProps> = ({
       }
     };
     fetchData(); 
-  }, [positionCurrent,selectedLocation]);
+  }, [selectedLocation, account?.address]);
 
   useEffect(() => {
     if (positionCurrent && selectedLocation) {
@@ -66,7 +65,7 @@ const Detail: React.FC<DropDetailProps> = ({
       const distanceToKm: string = convertDistance(distance); 
       if (!isNaN(parseFloat(distanceToKm))) {
         const distanceInKm: number = parseFloat(distanceToKm);
-        if (distanceInKm <= 0.03) { 
+        if (distanceInKm > 0.03) { 
           setCheckIsDistance(true);
         } else {
           setCheckIsDistance(false);
@@ -76,9 +75,11 @@ const Detail: React.FC<DropDetailProps> = ({
         console.error('Distance is not a valid number.'); 
       }
     }
-  }, [selectedLocation]);
+  }, [latitude, longitude, positionCurrent, selectedLocation]);
 
-
+  
+  console.log(selectedLocation);
+  console.log(distance)
   if (!selectedLocation || !isDrawerVisible) {
     return null;
   }
@@ -92,8 +93,6 @@ const Detail: React.FC<DropDetailProps> = ({
 
   const handleTransaction = async () => {
     if (!wallet.isConnected) return;
-    
-
     const { address, category, description, image, lat, lng, localName, collectionName } = selectedLocation;
 
     const txb = createMintNftTxnBlock({
@@ -109,7 +108,6 @@ const Detail: React.FC<DropDetailProps> = ({
     });
 
     try {
-        setisLoading(true);
         const res = await signAndExecuteTransactionBlock({
             transactionBlock: txb,
             chain: "sui:devnet",
@@ -119,13 +117,12 @@ const Detail: React.FC<DropDetailProps> = ({
             },
             onSuccess: async (result) => {
               try {
-                const res = await axios.post("http://localhost:3000/api/location", {
+                const res = await axios.post("http://localhost:3000/api/setLocation", {
                     address: account?.address,
                     locationId: selectedLocation.locationId
                 }) 
                 toast.success("Transaction successful!");
                 setIsDrawerVisible(false);
-                setisLoading(false);                
               } catch (err) {
                 console.error(err);
               }
@@ -136,7 +133,7 @@ const Detail: React.FC<DropDetailProps> = ({
         console.log(err);
     }
 } 
-
+  console.log("done");
   return (
     <div className="fixed inset-0 flex items-center justify-center">
       <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-sm flex flex-col" onClick={handleStopPropagation}>
@@ -187,13 +184,8 @@ const Detail: React.FC<DropDetailProps> = ({
                   </Button>
                 )
               ) : (
-                (isLoading ?  
-                  <Button disabled>
-                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                    Please wait
-                  </Button> : 
+                
                   <Button>Collected</Button> 
-                )
               )
             }
           </div>

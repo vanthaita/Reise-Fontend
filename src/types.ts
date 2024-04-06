@@ -20,11 +20,13 @@ export interface Location {
     collectionName: string;
   
   }
-export interface accountData  {
+  export interface AccountData  {
     address: string;
     locationId: string[];
+    receivedRewardsId: string[];
     point: number;
 }
+
 // export interface LocationInfoMarker  {
 //     localName: string;
 //     lat: number;
