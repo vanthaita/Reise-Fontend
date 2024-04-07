@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import Map from "@/components/Index";
+import { ConnectButton } from "@mysten/dapp-kit";
+
 const Home = () => {
+
   return (
     <main className="w-full lg:p-[1.5rem] h-[105vh] flex items-center justify-center ">
       <div className="text-center lg:mb-[20px] flex flex-col">
@@ -13,7 +16,7 @@ const Home = () => {
         </p>
         <div className=" flex flex-row gap-3 justify-center items-center">
           <Button>More</Button>
-          <Button>Get started</Button>
+          <Button >Get started</Button>
         </div>
       <div className="lg:w-full lg:h-[300px] w-full h-[200px] lg:rounded-xl mt-4">
         <Map />

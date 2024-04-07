@@ -51,8 +51,11 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
                 console.log(err);
             }
         }
-        fetchData();
-    }, [CollectionId, account?.address]);
+        if (wallet.isConnected)
+            fetchData();
+        else 
+            setCheckIsRewarded(false)
+    }, [account?.address]);
 
     async function handleRewards() {
         if (checkAllCollectionsIncluded) return;

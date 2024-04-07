@@ -66,11 +66,10 @@ const Map: React.FC = () => {
       }
     };
 
-  
   return <>
   <div className='w-full h-full relative'>
     <div className="w-full h-full rounded-sm relative" ref={mapContainerRef} />
-    <div className="absolute top-4 right-4 z-[9998]">
+    <div className="absolute top-4 right-4 z-[3]">
       <Button onClick={handleGeolocationClick}>Position</Button>
     </div>
     {selectedLocation && (

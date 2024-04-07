@@ -8,6 +8,7 @@ import axios from 'axios';
 
 const Navbar = () => {
   const account = useCurrentAccount();
+  const wallet = useCurrentWallet();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const [point, setPoint] = useState<number>();
@@ -24,9 +25,8 @@ const Navbar = () => {
         console.log(err);
       }
     }
-    fetchPoint();
+    if (wallet.isConnected) fetchPoint();
   }, [account?.address])
-  
   return (
     <nav className='relative bg-white z-30 block'>
       <div className='flex items-center justify-between h-[4.2rem] px-4 lg:px-6'>
@@ -67,7 +67,7 @@ const Navbar = () => {
 
         <div className='flex items-center rounded-xl flex-row gap-2'>
           {account?.address && <p className=' font-medium text-sm'>
-            { point === 0 ? 0 : point} Point
+            { !point ? 0 : point} Point
           </p>}
           <Wallet />
         </div>
@@ -75,7 +75,7 @@ const Navbar = () => {
 
 
       
-      <div className={`flex flex-col p-4 space-y-2 bg-white border-t border-gray-200 lg:hidden w-full ${isOpen ? ' block' : 'hidden'} absolute z-[99999]`}>
+      <div className={`flex flex-col p-4 space-y-2 bg-white border-t border-gray-200 lg:hidden w-full ${isOpen ? ' absolute' : 'hidden'}  z-[29]`}>
         <Link href="/map">
           <p className='text-sm font-medium hover:text-blue-500'>Map</p>
         </Link>

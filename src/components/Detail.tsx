@@ -28,6 +28,7 @@ const Detail: React.FC<DropDetailProps> = ({
   isDrawerVisible,
   setIsDrawerVisible,
 }) => {
+  
   const account = useCurrentAccount();
   const wallet = useCurrentWallet();
   const { mutate: signAndExecuteTransactionBlock } = useSignAndExecuteTransactionBlock();
