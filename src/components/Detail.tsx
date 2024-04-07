@@ -1,6 +1,5 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image';
 import { Button } from './ui/button';
@@ -16,7 +15,6 @@ import {
 } from '@mysten/dapp-kit';
 import { createMintNftTxnBlock } from '@/lib/moveCall';
 import axios from 'axios'
-import { ReloadIcon } from "@radix-ui/react-icons"
 interface DropDetailProps {
   selectedLocation: Location;
   isDrawerVisible: boolean;
@@ -28,7 +26,6 @@ const Detail: React.FC<DropDetailProps> = ({
   isDrawerVisible,
   setIsDrawerVisible,
 }) => {
-  
   const account = useCurrentAccount();
   const wallet = useCurrentWallet();
   const { mutate: signAndExecuteTransactionBlock } = useSignAndExecuteTransactionBlock();
@@ -76,7 +73,8 @@ const Detail: React.FC<DropDetailProps> = ({
         console.error('Distance is not a valid number.'); 
       }
     }
-  }, [latitude, longitude, positionCurrent, selectedLocation]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [latitude, longitude, selectedLocation]);
 
   console.log(selectedLocation);
   console.log(distance)
@@ -121,8 +119,8 @@ const Detail: React.FC<DropDetailProps> = ({
                     address: account?.address,
                     locationId: selectedLocation.locationId
                 }) 
-                toast.success("Transaction successful!");
                 setIsDrawerVisible(false);
+                alert!("success");
               } catch (err) {
                 console.error(err);
               }
@@ -139,7 +137,7 @@ const Detail: React.FC<DropDetailProps> = ({
       <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-sm flex flex-col" onClick={handleStopPropagation}>
         <div className="p-4 flex justify-between items-center">
           <div className='flex flex-col justify-center'>
-            <div className=' flex flex-row justify-between items-center'>
+            <div className=' flex flex-row items-center justify-between'>
               <h1 className="text-black text-lg font-bold">{selectedLocation.localName}</h1>
               <button onClick={handleCloseDrawer} className="focus:outline-none">
                 <svg
@@ -153,6 +151,7 @@ const Detail: React.FC<DropDetailProps> = ({
                 </svg>
               </button>
             </div>
+            
             <p className="text-black text-sm">{selectedLocation.address}</p>
           </div>
         </div>
@@ -188,6 +187,7 @@ const Detail: React.FC<DropDetailProps> = ({
           </div>
         </div>
       </div>
+
     </div>
   );
 };

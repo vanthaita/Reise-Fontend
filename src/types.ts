@@ -18,8 +18,7 @@ export interface Location {
     address: string;
     category: string;
     collectionName: string;
-  
-  }
+}
   export interface AccountData  {
     address: string;
     locationId: string[];

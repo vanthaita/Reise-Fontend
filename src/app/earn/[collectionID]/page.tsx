@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import axios from 'axios';
+import Link from 'next/link';
 
 const Page = ({ params }: { params: any }) => {
     const account = useCurrentAccount();
@@ -31,7 +32,7 @@ const Page = ({ params }: { params: any }) => {
     
     return (
         <>
-            <div className='lg:flex w-full h-1/2 items-center justify-center p-4'>
+            <div className='lg:flex w-full h-1/2 items-center justify-center p-8'>
                 {filteredCollection.map(collectionItem => (
                     <div key={collectionItem.CollectionId} className=' flex flex-col justify-center items-center'>
                         <h1 className=' font-bold text-xl'>{collectionItem.collectionName}</h1>
@@ -42,30 +43,37 @@ const Page = ({ params }: { params: any }) => {
 
             <div className='grid lg:mx-6 w-full h-full lg:grid-cols-3 grid-rows-3 justify-center gap-2 items-center'>
                 {filteredLocations.map(locationItem => (
-                    <div className='flex flex-col items-center  justify-between w-[320px] h-[384px] bg-white-300 rounded-sm shadow-md p-4 lg:ml-16' key={locationItem.locationId}>
-                        <div className=' flex flex-col justify-center items-center'>
-                            <p className=' font-bold text-lg text-center'>
+                    <div className='flex flex-col items-center bg-white rounded-xl shadow-md w-[20rem] h-[28rem] mb-6 lg:mx-[3.8rem]' key={locationItem.locationId}>
+                        <Image 
+                            src="/images/HCM.jpg"
+                            alt='image'
+                            width={320}
+                            height={192}
+                            className='rounded-t-xl'
+                        />
+                        <div className='flex flex-col justify-center p-4'>
+                            <p className='font-bold text-lg text-center mb-2'>
                                 {locationItem.localName}
                             </p>
-                            <p className=' font-medium text-xs'>
+                            <p className='font-medium text-xs text-center'>
                                 {locationItem.address}
                             </p>
-                        </div>
-                        <div className=' bg-black w-[16rem] h-[12rem] mt-4 rounded-xl'>
-                            <Image 
-                                src="/images/HCM.jpg"
-                                alt='image'
-                                width={256}
-                                height={192}
-                                className=' rounded-xl w-full h-full'
-                            />
-                        </div>
-
-                        {collectedLocation && collectedLocation.includes(locationItem.locationId) ? 
-                            <Button className='w-[256px] mt-4' disabled>Collected</Button> :
-                            <Button className='w-[256px] mt-4'>Collect</Button>
-                        }
+                            <div className=' flex flex-col justify-center items-start p-4'>
+                                <p className='font-medium text-xs'>
+                                    Category: {locationItem.category}
+                                </p>
+                                <p className='font-medium text-xs'>
+                                    Collection: {locationItem.collectionName}
+                                </p>    
+                            </div>
                     </div>
+                    {collectedLocation && collectedLocation.includes(locationItem.locationId) ? 
+                            <Button className='w-[256px]' disabled>Collected</Button> :
+                            <Link href='/map'>
+                                <Button className='w-[256px]'>Collect</Button>
+                            </Link>
+                        }
+                </div>
                 ))}
             </div>
         </>

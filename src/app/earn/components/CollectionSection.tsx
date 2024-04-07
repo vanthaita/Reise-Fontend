@@ -55,8 +55,9 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
             fetchData();
         else 
             setCheckIsRewarded(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [account?.address]);
-
+    console.log(listRewardId);
     async function handleRewards() {
         if (checkAllCollectionsIncluded) return;
         try {
@@ -81,24 +82,29 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
     }
 
     return (
-        <div className='bg-white-300 p-4 rounded-md shadow-md flex flex-col gap-5 lg:h-[80%] lg:w-[24rem] h-[20rem] w-[350px] '>
+        <div className='bg-white p-4 rounded-md shadow-md flex flex-col gap-5 lg:h-[80%] lg:w-[24rem] h-[20rem] w-[350px] lg:mx-[2rem]' key={CollectionId}>
             <div className='flex flex-col justify-center items-center'>
                 <h2 className='text-lg font-semibold text-center'>{CollectionName}</h2>
                 <p className='text-gray-700'>{description}</p>
             </div>
-            <div className='w-full h-[55%] cursor-pointer' onClick={handleSelectedCollection}>
+            <div className='w-full h-[55%] cursor-pointer relative'>
                 <Image
                     src='/images/HCM.jpg'
                     alt='Image Collection'
-                    width={200}
-                    height={200}
-                    className='h-full w-full'
+                    width={384}
+                    height={160}
+                    className='object-cover w-full h-full rounded-md'
                 />
+                <div className="absolute inset-0 flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-md">
+                    <Button className="text-white font-semibold" onClick={handleSelectedCollection}>View Collection</Button>
+                </div>
             </div>
-            {!checkIsRewarded ? <Button className='bg-black text-white' onClick={handleRewards}>Reward</Button>
-                : <Button  disabled>Rewarded</Button>
+            {!checkIsRewarded ? 
+                <Button className='bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors duration-300' onClick={handleRewards}>Reward</Button>
+                : <Button className="bg-gray-300 text-gray-600 py-2 rounded-md cursor-not-allowed" disabled>Rewarded</Button>
             }
         </div>
+
     );
 };
 

@@ -26,7 +26,7 @@ const Navbar = () => {
       }
     }
     if (wallet.isConnected) fetchPoint();
-  }, [account?.address])
+  }, [account?.address, wallet.isConnected])
   return (
     <nav className='relative bg-white z-30 block'>
       <div className='flex items-center justify-between h-[4.2rem] px-4 lg:px-6'>
@@ -55,15 +55,15 @@ const Navbar = () => {
               <p className='text-sm font-medium hover:text-blue-500'>Earn</p>
             </Link>
             
-            {account?.address && <Link href="/collection">
-              <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Your collection</p>
+            {account?.address && <Link href="/card">
+              <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Your card</p>
             </Link>}
             {/* <Link href="/create">
               <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Create</p>
             </Link> */}
           </div>
         </div>        
-        </div>
+        </div>  
 
         <div className='flex items-center rounded-xl flex-row gap-2'>
           {account?.address && <p className=' font-medium text-sm'>
@@ -92,8 +92,8 @@ const Navbar = () => {
         {/* <Link href="/create">
           <p className='text-sm font-medium hover:text-blue-500'>Create</p>
         </Link> */}
-         {account?.address && <Link href="/collection">
-              <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Your collection</p>
+         {account?.address && <Link href="/card">
+              <p className='text-sm font-medium cursor-pointer hover:text-blue-500'>Your card</p>
             </Link>}
       </div>
     </nav>

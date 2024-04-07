@@ -32,9 +32,6 @@ const Map: React.FC = () => {
       .setPopup(new mapboxgl.Popup().setHTML('<h3>You are here!</h3>')) // Add popup with message
       .addTo(map);
 
-
-
-
       locations.forEach((location: Location) => {
         const marker = new mapboxgl.Marker()
           .setLngLat([location.lng, location.lat])
@@ -66,6 +63,17 @@ const Map: React.FC = () => {
       }
     };
 
+    // useEffect(() => {
+    //   if (position?.latitude && position?.longitude) {
+    //     setViewport({
+    //       latitude: position.latitude,
+    //       longitude: position.longitude,
+    //     });
+    //   } else {
+    //     console.error('Error getting geolocation');
+    //   }
+    // }, [position?.latitude, position?.longitude])
+    
   return <>
   <div className='w-full h-full relative'>
     <div className="w-full h-full rounded-sm relative" ref={mapContainerRef} />
