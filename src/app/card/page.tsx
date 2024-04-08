@@ -4,7 +4,6 @@ import collection from "@/models/collection.json"
 import { useCurrentAccount, useCurrentWallet } from '@mysten/dapp-kit';
 import axios from 'axios';
 import locations from '@/models/locations.json'
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const Page = () => {
@@ -32,6 +31,7 @@ const Page = () => {
     const filteredLocations = locations.filter(location => collectedLocation?.includes(location.locationId));
 
     
+    
 
     return (
         <>
@@ -43,7 +43,8 @@ const Page = () => {
             <div className='grid lg:grid-cols-3 lg:gap-6 justify-center mb-10'>
                 {filteredLocations && filteredLocations.map(locationItem => (
                     <div className='flex flex-col items-center bg-white rounded-xl shadow-md w-[20rem] h-[25rem] mb-6 lg:mx-[5.2rem]' key={locationItem.locationId}>
-                    <Image src='image/HCM.jpg' alt='image' width='320' height='192' className='rounded-t-xl ' />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={locationItem.image} alt='image' width='320' height='192' className='rounded-t-xl ' />
                     <div className='flex flex-col justify-center p-4'>
                         <p className='font-bold text-lg text-center mb-2'>
                             {locationItem.localName}

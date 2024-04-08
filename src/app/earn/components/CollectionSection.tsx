@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { Button } from '../../../components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useCurrentAccount, useCurrentWallet } from '@mysten/dapp-kit';
@@ -82,20 +81,23 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
     }
 
     return (
-        <div className='bg-white p-4 rounded-md shadow-md flex flex-col gap-5 lg:h-[80%] lg:w-[24rem] h-[20rem] w-[350px] lg:mx-[2rem]' key={CollectionId}>
+        <div className='bg-white p-[2rem] rounded-xl shadow-md flex flex-col justify-center lg:gap-5 lg:w-[24rem] h-[70%] w-[350px] lg:mx-[2rem] gap-10' key={CollectionId}>
             <div className='flex flex-col justify-center items-center'>
                 <h2 className='text-lg font-semibold text-center'>{CollectionName}</h2>
-                <p className='text-gray-700'>{description}</p>
+                <p className='text-gray-700 text-[12px]'>{description}</p>
             </div>
-            <div className='w-full h-[55%] cursor-pointer relative'>
-                <Image
-                    src='/images/HCM.jpg'
+            
+            <div className='w-full h-[50%] cursor-pointer relative'>
+                
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={image}
                     alt='Image Collection'
                     width={384}
                     height={160}
-                    className='object-cover w-full h-full rounded-md'
+                    className=' w-full h-full rounded-md'
                 />
-                <div className="absolute inset-0 flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-md">
+                <div className="absolute inset-0 flex justify-center items-center opacity-0 hover:opacity-100 transition-opacity duration-300 bg-black bg-opacity-50 rounded-md ">
                     <Button className="text-white font-semibold" onClick={handleSelectedCollection}>View Collection</Button>
                 </div>
             </div>

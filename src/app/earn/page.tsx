@@ -16,7 +16,7 @@ const Page = () => {
                 </div>
             </div>
 
-            <div className='grid lg:mx-6 w-full h-full lg:grid-cols-3 grid-rows-3 justify-center'>
+            <div className='grid lg:mx-6 w-full h-full lg:grid-cols-3 grid-rows-3 justify-center gap-5'>
                 {collection.map((collectionItem, index) => {
                     return (
                         <CollectionSection

@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Image from 'next/image';
 import { Button } from './ui/button';
 import { calculateDistance,convertDistance } from '../functions/calculateDistance'; 
 import { useGeolocation } from '../hooks/useGeoLocation'; 
@@ -19,12 +19,16 @@ interface DropDetailProps {
   selectedLocation: Location;
   isDrawerVisible: boolean;
   setIsDrawerVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isTransitionSucess: boolean;
+  setIsTransitionSucess: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Detail: React.FC<DropDetailProps> = ({
   selectedLocation,
   isDrawerVisible,
   setIsDrawerVisible,
+  isTransitionSucess,
+  setIsTransitionSucess
 }) => {
   const account = useCurrentAccount();
   const wallet = useCurrentWallet();
@@ -112,6 +116,7 @@ const Detail: React.FC<DropDetailProps> = ({
         }, {
             onError: () => {
               console.log("error");
+              setIsTransitionSucess(false);
             },
             onSuccess: async (result) => {
               try {
@@ -120,7 +125,7 @@ const Detail: React.FC<DropDetailProps> = ({
                     locationId: selectedLocation.locationId
                 }) 
                 setIsDrawerVisible(false);
-                alert!("success");
+                // setIsTransitionSucess(true);
               } catch (err) {
                 console.error(err);
               }
@@ -132,63 +137,70 @@ const Detail: React.FC<DropDetailProps> = ({
     }
 } 
   console.log("done");
+  console.log(selectedLocation.image);
   return (
-    <div className="fixed inset-0 flex items-center justify-center mt-16">
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-sm flex flex-col" onClick={handleStopPropagation}>
-        <div className="p-4 flex justify-between items-center">
-          <div className='flex flex-col justify-center'>
-            <div className=' flex flex-row items-center justify-between'>
-              <h1 className="text-black text-lg font-bold">{selectedLocation.localName}</h1>
-              <button onClick={handleCloseDrawer} className="focus:outline-none">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-black"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
+    <>
+      <ToastContainer/>
+      
+      <div className="fixed inset-0 flex items-center justify-center mt-16 z-[4]">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-sm flex flex-col" onClick={handleStopPropagation}>
+          <div className="p-4 flex justify-between items-center">
+            <div className='flex flex-col justify-center'>
+              <div className=' flex flex-row items-center justify-between'>
+                <h1 className="text-black text-lg font-bold">{selectedLocation.localName}</h1>
+                <button onClick={handleCloseDrawer} className="focus:outline-none">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-black"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <p className="text-black text-sm">{selectedLocation.address}</p>
             </div>
-            
-            <p className="text-black text-sm">{selectedLocation.address}</p>
           </div>
-        </div>
-        <div className="flex items-center flex-col gap-2 p-4">
-          <div className=' rounded-xl w-[20rem] h-[14rem] mb-2'>
-            <Image 
-              src='/images/images.png'
-              alt='image'
-              width={288}
-              height={224}
-              className='rounded-xl w-full h-full'
-            />
-          </div>
-          <div className=' flex flex-col justify-center'>
-            <p className=" text-sm font-medium leading-4">{selectedLocation.description}</p>
-            <p className="text-xs font-normal leading-4">Category: {selectedLocation.category}</p>
-          </div>
-          <div className=' flex flex-row justify-between items-center gap-2 w-full p-4'>
-            <p className=' text-black'>{distance}</p>
-            {wallet.isConnected ? (
-              checkIsCollected ? (
-                <Button disabled>Collected</Button>
-              ) : checkIsDistance ? (
-                <Button className='w-[30%]' onClick={handleTransaction}>
-                  Collect
-                </Button>
+          <div className="flex items-center flex-col gap-2 p-4">
+            <div className=' rounded-xl w-[20rem] h-[14rem] mb-2'>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={selectedLocation.image}
+                alt='image'
+                width={288}
+                height={224}
+                className='rounded-xl w-full h-full'
+              />
+            </div>
+            <div className=' flex flex-col justify-center'>
+              <p className=" text-sm font-medium leading-4">{selectedLocation.description}</p>
+              <p className="text-xs font-normal leading-4">Category: {selectedLocation.category}</p>
+            </div>
+            <div className=' flex flex-row justify-between items-center gap-2 w-full p-4'>
+              <p className=' text-black'>{distance}</p>
+              {wallet.isConnected ? (
+                checkIsCollected ? (
+                  <Button disabled>Collected</Button>
+                ) : checkIsDistance ? (
+                  <Button className='w-[30%]' onClick={handleTransaction}>
+                    Collect
+                  </Button>
+                ) : (
+                  <Button className='w-[50%]'>Go closer to collect</Button>
+                )
               ) : (
-                <Button className='w-[50%]'>Go closer to collect</Button>
-              )
-            ) : (
-              <Button disabled>Connect your wallet!</Button>
-            )}
+                <Button disabled>Connect your wallet!</Button>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-    </div>
+      </div>
+      
+    </>
   );
 };
 

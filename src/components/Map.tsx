@@ -18,6 +18,8 @@ const Map: React.FC = () => {
   const markerRef = useRef<Marker | null>(null);
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [isTransitionSucess, setIsTransitionSucess] = useState(false);
+
   useEffect(() => {
     if (mapContainerRef.current) {
       mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
@@ -63,17 +65,17 @@ const Map: React.FC = () => {
       }
     };
 
-    // useEffect(() => {
-    //   if (position?.latitude && position?.longitude) {
-    //     setViewport({
-    //       latitude: position.latitude,
-    //       longitude: position.longitude,
-    //     });
-    //   } else {
-    //     console.error('Error getting geolocation');
-    //   }
-    // }, [position?.latitude, position?.longitude])
-    
+    useEffect(() => {
+      if (position?.latitude && position?.longitude) {
+        setViewport({
+          latitude: position.latitude,
+          longitude: position.longitude,
+        });
+      } else {
+        console.error('Error getting geolocation');
+      }
+    }, [position?.latitude, position?.longitude])
+    console.log(isTransitionSucess);
   return <>
   <div className='w-full h-full relative'>
     <div className="w-full h-full rounded-sm relative" ref={mapContainerRef} />
@@ -85,7 +87,23 @@ const Map: React.FC = () => {
         selectedLocation={selectedLocation}
         isDrawerVisible={isDrawerVisible}
         setIsDrawerVisible={setIsDrawerVisible}
+        isTransitionSucess={isTransitionSucess}
+        setIsTransitionSucess={setIsTransitionSucess}
       />
+    )}
+
+    {isTransitionSucess && (
+      <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-75 flex items-center justify-center">
+        <div className="w-full h-full flex flex-col items-center justify-center">
+          <h1 className="text-2xl text-white">
+            Congratulations!
+          </h1>
+          <p className="text-white">
+            You have successfully collected this location!
+          </p>
+          <Button onClick={() => setIsTransitionSucess(false)}>Close</Button>
+        </div>
+      </div>
     )}
   </div>
 </>

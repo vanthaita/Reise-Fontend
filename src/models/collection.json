@@ -4,22 +4,40 @@
         "collectionName" : "Ho Chi Minh City Collection", 
         "locationId": [
                 "bf2320df5132c1ce47738efdf1909e0d",
-                "0c3e30549ecc931ed517eba3b5309c73"
-        ],
-        "description": "Explore, collect",
-        "image": "http://example.com/images/",
-        "point": 100
-    },
-    {
-        "CollectionId": "a423021ad936b8693717102b57fe65e8",
-        "collectionName" : "Ho Chi Minh City Collection 2", 
-        "locationId": [
+                "0c3e30549ecc931ed517eba3b5309c73",
                 "2507197090b5c6e67c46ca6502130bbba",
                 "a1dcad4d4b9c16764989ec934b525b6c"
         ],
-        "description": "Explore, collect",
-        "image": "http://example.com/images/",
-        "point": 50
+        "description": "Explore the vibrant streets of Ho Chi Minh City and collect memorable experiences.",
+        "image": "https://bafybeieggiw5fgumd5idafpxiyqqk6ch66zwxuyk4gw6v4eeqvp7bf4nsa.ipfs.w3s.link/?filename=HCM.jpg",
+        "point": 100
+    },
+    {
+        "CollectionId": "5d17ff7fdb814d7379d3a15370b5ac69",
+        "collectionName" : "Tokyo Collection", 
+        "locationId": [
+                "d3d61c42d27a7e82d0c609469f7c8f19",
+                "18f1c3dfb8d96334e0e2ecf14de8b1dd",
+                "62b7cc986e6fcb98cb5a7c44f5e413f8"
+        ],
+        "description": "Embark on an adventure through the bustling streets of Tokyo and collect unforgettable moments.",
+        "image": "https://bafybeieztxvqfjfgjtlalkftxmrprovw7rhcvh67kcghkaaox64cyaw6i4.ipfs.w3s.link/tokyo.jpg",
+        "point": 150
 
+    }
+    ,
+    {
+        "CollectionId": "24cd8241922eecae9e74ed9235285de2",
+        "collectionName" : "Hanoi Collection", 
+        "locationId": [
+                "f42c74a4c5b52e15961ff271b0b6171a",
+                "d086987e881eb8a8cf15138a0e89037c",
+                "b61a74f4bc0fc1f5f16162b14b414d8a",
+                "d086987e881eb8a8cf15138a0e89037c",
+                "b4f6e134fe152f1fd88e45a42176b66d"
+        ],
+        "description": "Discover the charm of Hanoi as you explore its historical landmarks and collect cherished memories.",
+        "image": "https://bafybeiclsynqst6kafrq5557nelgsfubmk74y5vwak3jtjh34eba53vm4i.ipfs.w3s.link/HaNoi.jpg",
+        "point": 100
     }
 ]
