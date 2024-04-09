@@ -30,9 +30,6 @@ const Page = () => {
     
     const filteredLocations = locations.filter(location => collectedLocation?.includes(location.locationId));
 
-    
-    
-
     return (
         <>
             <div className='lg:flex w-full h-1/2 items-center justify-center'>
@@ -44,7 +41,7 @@ const Page = () => {
                 {filteredLocations && filteredLocations.map(locationItem => (
                     <div className='flex flex-col items-center bg-white rounded-xl shadow-md w-[20rem] h-[25rem] mb-6 lg:mx-[5.2rem]' key={locationItem.locationId}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={locationItem.image} alt='image' width='320' height='192' className='rounded-t-xl ' />
+                    <img src={locationItem.image} alt='image' width='320' height='192' className='rounded-t-xl w-full h-full' />
                     <div className='flex flex-col justify-center p-4'>
                         <p className='font-bold text-lg text-center mb-2'>
                             {locationItem.localName}

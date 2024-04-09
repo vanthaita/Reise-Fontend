@@ -55,17 +55,7 @@
         "category": "Chợ",
         "collectionName": "Ho Chi Minh City Collection"
     },
-    {
-        "locationId": "f9dbc9c9f07f99e4fe574eb717ef96bc",
-        "localName": "Nhà hát Thành phố Hồ Chí Minh",
-        "lat": 10.776572,
-        "lng": 106.700895,
-        "image": "https://bafybeifleambajb7ayvw3imccjqdlq3e2blig3kl7ofttbyb5yz7oqjimu.ipfs.w3s.link/NhaHat.jpg",
-        "description": "Nhà hát Thành phố Hồ Chí Minh, hay Nhà hát Lớn Thành phố Hồ Chí Minh, là một trong những cung điện nghệ thuật nổi tiếng nhất tại Việt Nam.",
-        "address": "Số 7 Lê Thánh Tôn, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh",
-        "category": "Nhà hát",
-        "collectionName": "Ho Chi Minh City Collection"
-      },
+    
       {
         "locationId": "112a0795ad79ad0b5418df71b2844717",
         "localName": "Khu phố Tây Bùi Viện",

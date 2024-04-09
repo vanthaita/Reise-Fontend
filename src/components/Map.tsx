@@ -8,7 +8,8 @@ import locations from '@/models/locations.json';
 import { Button } from './ui/button';
 import Detail from './Detail';
 import { Location } from '@/types';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [viewport, setViewport] = useState({ latitude: 10.762622, longitude: 106.682571 });

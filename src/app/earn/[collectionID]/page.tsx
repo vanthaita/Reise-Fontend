@@ -43,14 +43,14 @@ const Page = ({ params }: { params: any }) => {
 
             <div className='grid lg:mx-6 w-full h-full lg:grid-cols-3 grid-rows-3 justify-center gap-2 items-center'>
                 {filteredLocations.map(locationItem => (
-                    <div className='flex flex-col items-center bg-white rounded-xl shadow-md w-[20rem] h-[28rem] mb-6 lg:mx-[3.8rem]' key={locationItem.locationId}>
+                    <div className='flex flex-col items-center bg-white rounded-xl shadow-md w-[20rem] h-[28.5rem] mb-6 lg:mx-[3.8rem] justify-center' key={locationItem.locationId}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
-                            src="/images/HCM.jpg"
+                            src={locationItem.image}
                             alt='image'
                             width={320}
                             height={192}
-                            className='rounded-t-xl'
+                            className='rounded-t-xl w-full h-full'
                         />
                         <div className='flex flex-col justify-center p-4'>
                             <p className='font-bold text-lg text-center mb-2'>
@@ -69,13 +69,16 @@ const Page = ({ params }: { params: any }) => {
                             </div>
                     </div>
                     {collectedLocation && collectedLocation.includes(locationItem.locationId) ? 
-                            <Button className='w-[256px]' disabled>Collected</Button> :
+                            <Button className='w-[256px] p-4 mb-6' disabled>Collected</Button> :
                             <Link href='/map'>
-                                <Button className='w-[256px]'>Collect</Button>
+                                <Button className='w-[256px] p-4 mb-6'>Collect</Button>
                             </Link>
                         }
                 </div>
                 ))}
+
+
+                
             </div>
         </>
     );

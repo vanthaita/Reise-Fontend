@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { Button } from './ui/button';
 import { calculateDistance,convertDistance } from '../functions/calculateDistance'; 
 import { useGeolocation } from '../hooks/useGeoLocation'; 
@@ -140,11 +139,10 @@ const Detail: React.FC<DropDetailProps> = ({
   console.log(selectedLocation.image);
   return (
     <>
-      <ToastContainer/>
       
-      <div className="fixed inset-0 flex items-center justify-center mt-16 z-[4]">
-        <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-sm flex flex-col" onClick={handleStopPropagation}>
-          <div className="p-4 flex justify-between items-center">
+      <div className="fixed inset-0 flex items-center justify-center mt-16 z-[4] p-4">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-sm flex flex-col mx-2" onClick={handleStopPropagation}>
+          <div className="p-6 flex justify-between items-center">
             <div className='flex flex-col justify-center'>
               <div className=' flex flex-row items-center justify-between'>
                 <h1 className="text-black text-lg font-bold">{selectedLocation.localName}</h1>
@@ -165,7 +163,7 @@ const Detail: React.FC<DropDetailProps> = ({
             </div>
           </div>
           <div className="flex items-center flex-col gap-2 p-4">
-            <div className=' rounded-xl w-[20rem] h-[14rem] mb-2'>
+            <div className=' rounded-xl w-[22rem] h-[14rem] mb-2'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={selectedLocation.image}
@@ -197,9 +195,8 @@ const Detail: React.FC<DropDetailProps> = ({
             </div>
           </div>
         </div>
-
       </div>
-      
+
     </>
   );
 };
