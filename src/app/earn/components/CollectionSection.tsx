@@ -4,7 +4,7 @@ import { Button } from '../../../components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useCurrentAccount, useCurrentWallet } from '@mysten/dapp-kit';
 import axios from 'axios';
-
+import Image from 'next/image';
 type Props = {
     CollectionId: string;
     CollectionName: string;
@@ -90,7 +90,7 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
             <div className='w-full h-[50%] cursor-pointer relative'>
                 
                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                     src={image}
                     alt='Image Collection'
                     width={384}

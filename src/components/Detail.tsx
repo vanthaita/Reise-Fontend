@@ -14,6 +14,7 @@ import {
 } from '@mysten/dapp-kit';
 import { createMintNftTxnBlock } from '@/lib/moveCall';
 import axios from 'axios'
+import Image from 'next/image';
 interface DropDetailProps {
   selectedLocation: Location;
   isDrawerVisible: boolean;
@@ -165,7 +166,7 @@ const Detail: React.FC<DropDetailProps> = ({
           <div className="flex items-center flex-col gap-2 p-4">
             <div className=' rounded-xl w-[22rem] h-[14rem] mb-2'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={selectedLocation.image}
                 alt='image'
                 width={288}
