@@ -34,6 +34,9 @@ Welcome to Reise! We're a platform empowering individuals to curate, collect, an
 
 Reise: Explore. Collect. Own.
 
+### Mobile Development Coming Soon
+
+We're committed to providing a seamless mobile experience for our users. As developers who are currently students, our primary goal is learning and research. Therefore, we aim to launch our mobile application as quickly as possible to expand our learning experience.
 ## Getting Started
 
 First, run the development server:
