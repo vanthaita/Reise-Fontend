@@ -76,9 +76,6 @@ const Page = ({ params }: { params: any }) => {
                         }
                 </div>
                 ))}
-
-
-                
             </div>
         </>
     );

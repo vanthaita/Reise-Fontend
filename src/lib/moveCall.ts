@@ -2,9 +2,10 @@ import { TransactionBlock } from "@mysten/sui.js/transactions";
 
 export function createMintNftTxnBlock({ _name, _description, _url, _lat, _lng, _category, _creator, _address_local, _collection_name} : { _name: string, _description: string, _url: string, _lat: string, _lng: string, _category: string, _creator: string, _address_local: string, _collection_name: string}) {
   const txb = new TransactionBlock();
-  
+  //0x0f8c384416f2205d92f84a07fe5feee2f62a8ec3d07fa6b12707ee283d0e655e
+  //0xcc447980a499a3306e5d8e902b6a07aefe2081c602f219cbdb5e1aa2d6751962
   const contractAddress =
-    "0xcc447980a499a3306e5d8e902b6a07aefe2081c602f219cbdb5e1aa2d6751962";
+    process.env.NEXT_PUBLIC_PACKAGEID;
   const contractModule = "REISE_NFT";
   const contractMethod = "mint_reise_nft";
   const nftName = `${_name}`;
