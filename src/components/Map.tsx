@@ -1,7 +1,6 @@
 'use client'
 import React, { useRef, useEffect, useState, use } from 'react';
 import mapboxgl, { Marker } from 'mapbox-gl';
-import {Marker as Reactmarker} from 'react-map-gl';  
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useGeolocation } from '@/hooks/useGeoLocation';
 import locations from '@/models/locations.json'; 
@@ -10,6 +9,7 @@ import Detail from './Detail';
 import { Location } from '@/types';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Image from 'next/image';
 const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [viewport, setViewport] = useState({ latitude: 10.762622, longitude: 106.682571 });
@@ -81,7 +81,11 @@ const Map: React.FC = () => {
   <div className='w-full h-full relative'>
     <div className="w-full h-full rounded-sm relative" ref={mapContainerRef} />
     <div className="absolute top-4 right-4 z-[3]">
-      <Button onClick={handleGeolocationClick}>Position</Button>
+      <button onClick={handleGeolocationClick}>
+        {/* eslint-disable-next-line jsx-a11y/alt-text */}
+        <Image src='/images/position.png' alt='position' height={30} width={30} />    
+
+      </button>
     </div>
     {selectedLocation && (
       <Detail

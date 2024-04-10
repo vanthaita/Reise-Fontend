@@ -81,9 +81,9 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
     }
 
     return (
-        <div className='bg-white p-[2rem] rounded-xl shadow-md flex flex-col justify-center lg:gap-2 lg:w-[24rem] h-[70%] w-[350px] lg:mx-[2rem] gap-10' key={CollectionId}>
+        <div className='bg-white p-[2rem] rounded-xl shadow-md flex flex-col justify-center lg:w-[24rem] h-[65%] w-[350px] lg:mx-[2rem] gap-10' key={CollectionId}>
             <div className='flex flex-col justify-center items-center'>
-                <h2 className='text-lg font-semibold text-center'>{CollectionName}</h2>
+                <h2 className=' text-2xl font-bold text-center'>{CollectionName}</h2>
                 <p className='text-gray-700 text-[12px]'>{description}</p>
             </div>
             
