@@ -37,6 +37,11 @@ Reise: Explore. Collect. Own.
 ### Mobile Development Coming Soon
 
 We're committed to providing a seamless mobile experience for our users. As developers who are currently students, our primary goal is learning and research. Therefore, we aim to launch our mobile application as quickly as possible to expand our learning experience.
+
+#### How to Contribute:
+
+If you're interested in contributing your local business, please contact us at thaitv225@gmail.com. We welcome any contributions and look forward to collaborating with you!
+
 ## Getting Started
 
 First, run the development server:
