@@ -1,4 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Overview
+Reise: Empowering Real-Life Experiences with Digital Cards
+Welcome to Reise! We're a platform dedicated to empowering individuals to curate, collect, and own their real-life experiences through digital cards. By leveraging NFTs (Non-Fungible Tokens), we aim to revolutionize tourism and community engagement, offering users a unique way to showcase their adventures and discoveries.
+
+Features
+1. Task Completion
+Reise offers task completion features, encouraging users to engage with local businesses and explore destinations to earn rewards.
+
+2. Collect and Share Digital Cards
+Our platform enables users to collect and share digital cards, showcasing their real-life experiences, including lesser-known local attractions, and preserving them as NFTs.
+
+3. Earn Points for Rewards
+Users have the opportunity to accumulate points by completing tasks provided by local businesses or achieving a full collection of locations, thereby unlocking rewards.
+
+Roadmap
+Year 1:
+Launch and Initial Growth: Introduce Reise to the market and establish our user base.
+Feature Development: Continuously enhance our platform with new and exciting features.
+Partnerships and Collaborations: Forge strategic partnerships to expand our reach and offerings.
+Marketing and Brand Building: Build awareness and establish Reise as a leading platform in the industry.
+Year 2:
+Scaling and Expansion: Scale operations and expand into new markets.
+Enhanced Monetization: Implement advanced monetization strategies to sustain growth.
+Community Building: Foster a strong and engaged community around Reise.
+Continuous Innovation: Stay ahead of the curve by continuously innovating and adapting to user needs.
+Year 3:
+Launch Token & Expand Rewards System: Introduce our native token and expand our rewards system.
+Continuous Product Refinement: Continuously refine and improve our platform based on user feedback.
+Enhanced DePIN Features: Enhance security and user privacy with advanced DePIN features.
+Additional Revenue Streams: Explore and implement additional revenue streams to ensure long-term sustainability.
+Get Started
+Join Reise today and start curating your real-life experiences in a whole new way!
+
+For more information, visit our website or contact us at contact@reise.com.
+
+Follow us on Twitter and Instagram for the latest updates and adventures!
+
+Reise: Explore. Collect. Own.
 
 ## Getting Started
 
