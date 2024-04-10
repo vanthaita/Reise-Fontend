@@ -66,7 +66,7 @@ const Navbar = () => {
         </div>  
 
         <div className='flex items-center rounded-xl flex-row gap-[2px]'>
-          {account?.address && <p className=' font-medium text-sm'>
+          {account?.address && <p className=' font-medium text-sm p-4'>
             {point} Point
           </p>}
           <Wallet />

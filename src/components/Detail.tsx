@@ -166,7 +166,7 @@ const Detail: React.FC<DropDetailProps> = ({
           <div className="flex items-center flex-col gap-2 p-4">
             <div className=' rounded-xl w-[22rem] h-[14rem] mb-2'>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <Image
+              <img
                 src={selectedLocation.image}
                 alt='image'
                 width={288}

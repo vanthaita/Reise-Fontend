@@ -45,7 +45,7 @@ const Page = ({ params }: { params: any }) => {
                 {filteredLocations.map(locationItem => (
                     <div className='flex flex-col items-center bg-white rounded-xl shadow-md w-[20rem] h-[28.5rem] mb-6 lg:mx-[3.8rem] justify-center' key={locationItem.locationId}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <Image 
+                        <img 
                             src={locationItem.image}
                             alt='image'
                             width={320}

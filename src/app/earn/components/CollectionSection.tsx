@@ -90,7 +90,7 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
             <div className='w-full h-[50%] cursor-pointer relative'>
                 
                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                <Image
+                <img
                     src={image}
                     alt='Image Collection'
                     width={384}

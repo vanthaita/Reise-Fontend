@@ -5,7 +5,7 @@ export function createMintNftTxnBlock({ _name, _description, _url, _lat, _lng, _
   //0x0f8c384416f2205d92f84a07fe5feee2f62a8ec3d07fa6b12707ee283d0e655e
   //0xcc447980a499a3306e5d8e902b6a07aefe2081c602f219cbdb5e1aa2d6751962
   const contractAddress =
-    process.env.NEXT_PUBLIC_PACKAGEID;
+    `${process.env.NEXT_PUBLIC_PACKAGEID}`;
   const contractModule = "REISE_NFT";
   const contractMethod = "mint_reise_nft";
   const nftName = `${_name}`;
