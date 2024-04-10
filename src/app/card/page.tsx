@@ -1,6 +1,5 @@
 'use client'
 import React , {useEffect,useState} from 'react';
-import collection from "@/models/collection.json"
 import { useCurrentAccount, useCurrentWallet } from '@mysten/dapp-kit';
 import axios from 'axios';
 import locations from '@/models/locations.json'
@@ -10,8 +9,10 @@ const Page = () => {
     const account = useCurrentAccount();
     const wallet = useCurrentWallet();
     const router = useRouter();
-    if(wallet.isDisconnected) {
-        router.push(`/`);
+    if (typeof window !== 'undefined') {
+        if (wallet.isDisconnected) {
+            router.push(`/`);
+        }
     }
     const [collectedLocation, setCollectedLocation] = useState<string[]>();
     useEffect(() => {

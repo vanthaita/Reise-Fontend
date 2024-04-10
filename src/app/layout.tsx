@@ -27,8 +27,6 @@ export default function RootLayout({
         )}>
         <DappKitProvider>
           <Navbar />
-          <div className="">
-            </div>
           {children}
           <Footer />
         </DappKitProvider>
