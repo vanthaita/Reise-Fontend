@@ -52,7 +52,10 @@ const Detail: React.FC<DropDetailProps> = ({
         console.error("Error:", err);
       }
     };
-    fetchData(); 
+    if(wallet.isConnected) {
+      fetchData(); 
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedLocation, account?.address]);
 
   useEffect(() => {
@@ -78,7 +81,7 @@ const Detail: React.FC<DropDetailProps> = ({
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [latitude, longitude, selectedLocation]);
+  }, [positionCurrent ,selectedLocation]);
 
   console.log(selectedLocation);
   console.log(distance)
@@ -136,8 +139,6 @@ const Detail: React.FC<DropDetailProps> = ({
         console.log(err);
     }
 } 
-  console.log("done");
-  console.log(selectedLocation.image);
   return (
     <>
       
