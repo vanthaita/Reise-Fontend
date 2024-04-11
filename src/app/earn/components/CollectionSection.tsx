@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { useCurrentAccount, useCurrentWallet } from '@mysten/dapp-kit';
 import axios from 'axios';
 import Image from 'next/image';
+import collection from "@/models/collection.json"
+
 type Props = {
     CollectionId: string;
     CollectionName: string;
@@ -22,32 +24,43 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
     const [checkAllCollectionsIncluded, setCheckAllCollectionsIncluded] = useState(false);
     const [checkIsRewarded, setCheckIsRewarded] = useState(false);
     const [listRewardId, setListRewardId] = useState<string[]>([]);
+    const [checkCondition, setCheckCondition] = useState(false);
+    const [isLoadingReward, setIsLoadingReward] = useState(false);
+    const [successMessage, setSuccessMessage] = useState<string>('');
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const wallet = useCurrentWallet();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.post<string[]>("http://localhost:3000/api/getAllLocation", {
-                    address: account?.address
-                })
-                setCollectedLocations(res.data);
+                if(wallet.isConnected) {
+                    const res = await axios.post<string[]>("http://localhost:3000/api/getAllLocation", {
+                        address: account?.address
+                    })
+                    setCollectedLocations(res.data);
+                }
             } catch (err) {
                 console.log(err);
             }
         };
         fetchData();
-    }, [account?.address]);
+    }, [account?.address, wallet.isConnected]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.post<string[]>("http://localhost:3000/api/getReward", {
-                    address: account?.address,
-                })
-                setListRewardId(res.data);
-                setCheckIsRewarded(res.data.includes(CollectionId));
+                if(wallet.isConnected) {
+                    setIsLoadingReward(true); // Start loading rewards
+                    const res = await axios.post<string[]>("http://localhost:3000/api/getReward", {
+                        address: account?.address,
+                    })
+                    setListRewardId(res.data);
+                    setCheckIsRewarded(res.data.includes(CollectionId));
+                }
             } catch (err) {
                 console.log(err);
+            } finally {
+                setIsLoadingReward(false); // Stop loading rewards
             }
         }
         if (wallet.isConnected)
@@ -56,30 +69,50 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
             setCheckIsRewarded(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [account?.address]);
-    console.log(listRewardId);
-    async function handleRewards() {
-        if (checkAllCollectionsIncluded) return;
-        try {
-            const res = await axios.post("http://localhost:3000/api/setPoint", {
-                address: account?.address,
-                point: point
-            });
-            const response = await axios.post("http://localhost:3000/api/setReward", {
-                address: account?.address,
-                CollectionId: CollectionId
-            });
-            console.log(response.data);
-            console.log(res.data);
-        } catch (err) {
-            console.log(err);
+
+    const handleCheckReward = (CollectionId: string) : boolean => {
+        const foundCollection = collection.find(collectionItem => collectionItem.CollectionId === CollectionId);
+        if (!foundCollection) {
+            console.log("Collection not found");
+            return false;
         }
+        const filteredLocationIds = foundCollection.locationId;
+        return filteredLocationIds.every((locationId: string) => {
+            return collectedLocations.includes(locationId);
+        });
     }
 
+    async function handleRewards() {
+        setIsLoadingReward(true); 
+        if (checkAllCollectionsIncluded) return;
+        try {
+            if (wallet.isConnected) {
+                setCheckCondition(handleCheckReward(CollectionId));
+                if (checkCondition) {
+                    const res = await axios.post("http://localhost:3000/api/setPoint", {
+                        address: account?.address,
+                        point: point
+                    });
+                    const response = await axios.post("http://localhost:3000/api/setReward", {
+                        address: account?.address,
+                        CollectionId: CollectionId
+                    });
+
+                    setSuccessMessage('Reward successfully granted!');
+                }
+            }
+            console.log(isLoadingReward);
+        } catch (err) {
+            console.log(err);
+            setErrorMessage('Failed to process reward. Please try again.');
+        } finally {
+            setIsLoadingReward(false); // Stop loading rewards
+        }
+    }
     const handleSelectedCollection = () => {
         setSelectedCollection(CollectionId);
         router.push(`/earn/${CollectionId}`);
     }
-
     return (
         <div className='bg-white p-[2rem] rounded-xl shadow-md flex flex-col justify-center lg:w-[24rem] h-[65%] w-[350px] lg:mx-[2rem] gap-10' key={CollectionId}>
             <div className='flex flex-col justify-center items-center'>
@@ -102,9 +135,19 @@ const CollectionSection: React.FC<Props> = ({ CollectionName, description, image
                 </div>
             </div>
             {!checkIsRewarded ? 
-                <Button className='bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors duration-300' onClick={handleRewards}>Reward</Button>
+                <Button
+                className='bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-colors duration-300'
+                onClick={handleRewards}
+                disabled={isLoadingReward}
+            >
+                {(isLoadingReward) ? 'Loading...' : 'Reward'}
+            </Button>
                 : <Button className="bg-gray-300 text-gray-600 py-2 rounded-md cursor-not-allowed" disabled>Rewarded</Button>
             }
+
+            {successMessage && <p className="text-green-500 text-sm">{successMessage}</p>}
+            
+            {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
         </div>
 
     );
