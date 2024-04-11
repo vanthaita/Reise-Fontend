@@ -97,19 +97,23 @@ const Map: React.FC = () => {
       />
     )}
 
-    {isTransitionSucess && (
-      <div className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-75 flex items-center justify-center">
-        <div className="w-full h-full flex flex-col items-center justify-center">
-          <h1 className="text-2xl text-white">
-            Congratulations!
-          </h1>
-          <p className="text-white">
-            You have successfully collected this location!
-          </p>
-          <Button onClick={() => setIsTransitionSucess(false)}>Close</Button>
-        </div>
+  {isTransitionSucess && (
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white w-[30%] h-[30%] flex flex-col items-center justify-center rounded-lg p-8">
+        <h1 className="text-2xl font-bold mb-4">
+          Congratulations!
+        </h1>
+        <p className="text-center">
+          You have successfully collected this location!
+        </p>
+        <button onClick={() => setIsTransitionSucess(false)} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">
+          Close
+        </button>
       </div>
-    )}
+    </div>
+  )}
+
+
   </div>
 </>
 

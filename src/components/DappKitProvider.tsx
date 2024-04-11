@@ -24,6 +24,7 @@ const DappKitProvider = ({ children } : { children: React.ReactNode}) => {
     <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={networkConfig} defaultNetwork="devnet">
         <WalletProvider 
+          
           zkSend={{
             name: "Reise",
           }}

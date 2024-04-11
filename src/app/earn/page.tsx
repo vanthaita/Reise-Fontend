@@ -1,10 +1,10 @@
 'use client'
 import CollectionSection from '@/app/earn/components/CollectionSection';
-import React from 'react';
+import React, { useState } from 'react';
 import collection from "@/models/collection.json"
 
 const Page = () => {
-
+    const [checkCondition, setCheckCondition] = useState(false);
     return (
         <>
             <div className='lg:flex w-full h-1/2 items-center justify-center'>
@@ -27,12 +27,28 @@ const Page = () => {
                             image={collectionItem.image}
                             point={collectionItem.point}
                             locationId={collectionItem.locationId}
+                            checkCondition={checkCondition}
+                            setCheckCondition={setCheckCondition}
                         />
                     )
                 })}
                 
             </div>
-
+            {checkCondition && (
+                <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white w-[30%] h-[30%] flex flex-col items-center justify-center rounded-lg p-8">
+                    <h1 className="text-2xl font-bold mb-4">
+                    Congratulations!
+                    </h1>
+                    <p className="text-center">
+                    You have successfully received rewards!
+                    </p>
+                    <button onClick={() => setCheckCondition(false)} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">
+                    Close
+                    </button>
+                </div>
+                </div>
+            )}
         </>
     );
 };

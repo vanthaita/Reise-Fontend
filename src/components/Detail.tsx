@@ -40,25 +40,6 @@ const Detail: React.FC<DropDetailProps> = ({
   const latitude: number = positionCurrent?.latitude ?? 0;
   const longitude: number = positionCurrent?.longitude ?? 0;
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.post("http://localhost:3000/api/getlocation", {
-          address: account?.address,
-          locationId: selectedLocation.locationId
-        });
-        console.log(res);
-        setcheckIsCollected(res.data);
-      } catch (err) {
-        console.error("Error:", err);
-      }
-    };
-    if(wallet.isConnected) {
-      fetchData(); 
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedLocation, account?.address]);
-
-  useEffect(() => {
     if (positionCurrent && selectedLocation) {
       const distance: number = calculateDistance(
         latitude,
@@ -82,6 +63,26 @@ const Detail: React.FC<DropDetailProps> = ({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [positionCurrent ,selectedLocation]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.post("http://localhost:3000/api/getlocation", {
+          address: account?.address,
+          locationId: selectedLocation.locationId
+        });
+        console.log(res);
+        setcheckIsCollected(res.data);
+      } catch (err) {
+        console.error("Error:", err);
+      }
+    };
+    if(wallet.isConnected) {
+      fetchData(); 
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedLocation, account?.address]);
+
+  
 
   console.log(selectedLocation);
   console.log(distance)
@@ -111,14 +112,13 @@ const Detail: React.FC<DropDetailProps> = ({
         _address_local: address,
         _collection_name: collectionName,
     });
-
     try {
         const res = await signAndExecuteTransactionBlock({
             transactionBlock: txb,
             chain: "sui:devnet",
         }, {
-            onError: () => {
-              console.log("error");
+            onError: async (result) => {
+              console.log("error", result);
               setIsTransitionSucess(false);
             },
             onSuccess: async (result) => {
@@ -128,7 +128,7 @@ const Detail: React.FC<DropDetailProps> = ({
                     locationId: selectedLocation.locationId
                 }) 
                 setIsDrawerVisible(false);
-                // setIsTransitionSucess(true);
+                setIsTransitionSucess(true);
               } catch (err) {
                 console.error(err);
               }
