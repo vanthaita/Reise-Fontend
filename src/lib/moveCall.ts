@@ -20,15 +20,15 @@ export function createMintNftTxnBlock({ _name, _description, _url, _lat, _lng, _
   txb.moveCall({
     target: `${contractAddress}::${contractModule}::${contractMethod}`,
     arguments: [
-      txb.pure(nftName),
-      txb.pure(nftDescription),
-      txb.pure.string(_url),
-      txb.pure(nftLat),
-      txb.pure(nftLng),
-      txb.pure(nftCategory),
-      txb.pure(_creator),
-      txb.pure(nftAddressLocal),
-      txb.pure(nftCollectionName),
+      txb.pure.string(nftName),
+      txb.pure.string(nftDescription),
+      txb.pure.string(_url as string),
+      txb.pure.string(nftLat),
+      txb.pure.string(nftLng),
+      txb.pure.string(nftCategory),
+      txb.pure(nftCreator),
+      txb.pure.string(nftAddressLocal),
+      txb.pure.string(nftCollectionName),
     ],
   });
   return txb;
