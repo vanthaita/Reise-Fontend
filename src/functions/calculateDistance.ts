@@ -19,9 +19,5 @@ export function calculateDistance(
 }
 
 export function convertDistance(distance: number): string {
-  if (distance >= 1000) {
     return (distance / 1000).toFixed(2) + ' km';
-  } else {
-    return Math.ceil(distance) + ' m';
-  }
 }

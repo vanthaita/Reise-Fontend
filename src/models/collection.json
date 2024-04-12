@@ -1,5 +1,14 @@
 [
     {
+        "CollectionId": "Test48b6b2bac25fb02a6b51b30e3356d0f7",
+        "collectionName" : "Test", 
+        "locationId": [
+                "a8f8f926a05fb97e544390aa409a4f0a"
+        ],
+        "description": "Test collection.",
+        "image": "https://bafybeieggiw5fgumd5idafpxiyqqk6ch66zwxuyk4gw6v4eeqvp7bf4nsa.ipfs.w3s.link/?filename=HCM.jpg",
+        "point": 100
+    },{
         "CollectionId": "48b6b2bac25fb02a6b51b30e3356d0f7",
         "collectionName" : "Ho Chi Minh City Collection", 
         "locationId": [
@@ -38,15 +47,6 @@
         ],
         "description": "Discover the charm of Hanoi as you explore its historical landmarks and collect cherished memories.",
         "image": "https://bafybeiclsynqst6kafrq5557nelgsfubmk74y5vwak3jtjh34eba53vm4i.ipfs.w3s.link/HaNoi.jpg",
-        "point": 100
-    },{
-        "CollectionId": "Test48b6b2bac25fb02a6b51b30e3356d0f7",
-        "collectionName" : "Test", 
-        "locationId": [
-                "4c8c296a99dc23a9c16fe154eeaefa10"
-        ],
-        "description": "Explore the vibrant streets of Ho Chi Minh City and collect memorable experiences.",
-        "image": "https://bafybeieggiw5fgumd5idafpxiyqqk6ch66zwxuyk4gw6v4eeqvp7bf4nsa.ipfs.w3s.link/?filename=HCM.jpg",
         "point": 100
     }
 ]

@@ -1,5 +1,16 @@
 [
-
+  {
+      "locationId": "a8f8f926a05fb97e544390aa409a4f0a",
+      "localName": "Ktx khu a, Tòa AH2 - Test",
+      "lat": 10.881656,
+      "lng": 106.809055,
+      "image": "https://bafybeigtemklkidctalggtdumal7gzeqvgeomjub364j3xqococtvtq7aa.ipfs.w3s.link/ah2.jpg",
+      "description": "Kiến túc xá khu A, Đại học quốc gia thành phố Hồ Chí Minh",
+      "address": "Ký túc xá khu A: Đường Tạ Quang Bửu, Khu phố 6, Phường Linh Trung, Thành phố Thủ Đức, Thành phố Hồ Chí Minh",
+      "category": "Kiến túc xá",
+      "collectionName": "Test collection"
+  }
+  ,
     {
         "locationId": "4c8c296a99dc23a9c16fe154eeaefa10",
         "localName": "Đại học Quốc gia Thành phố Hồ Chí Minh",

@@ -25,8 +25,8 @@ const Navbar = () => {
         console.log(err);
       }
     }
-    if (wallet.isConnected) fetchPoint();
-  }, [account?.address, wallet.isConnected])
+    fetchPoint();
+  }, []);
   return (
     <nav className='relative bg-white z-30 block'>
       <div className='flex items-center justify-between h-[4.2rem] px-4 lg:px-6'>

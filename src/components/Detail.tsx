@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 
 import { Button } from './ui/button';
 import { calculateDistance,convertDistance } from '../functions/calculateDistance'; 
@@ -35,34 +35,32 @@ const Detail: React.FC<DropDetailProps> = ({
   const { mutate: signAndExecuteTransactionBlock } = useSignAndExecuteTransactionBlock();
   const [distance, setDistance] = useState<string | undefined>(undefined); 
   const positionCurrent: Position | null = useGeolocation();
-  const [checkIsDistance, setCheckIsDistance] = useState(false);
   const [checkIsCollected, setcheckIsCollected] = useState(false);
   const latitude: number = positionCurrent?.latitude ?? 0;
   const longitude: number = positionCurrent?.longitude ?? 0;
+  const checkIsDistance = useRef(false);
+
   useEffect(() => {
     if (positionCurrent && selectedLocation) {
-      const distance: number = calculateDistance(
-        latitude,
-        longitude,
+      const distance = calculateDistance(
+        positionCurrent.latitude,
+        positionCurrent.longitude,
         selectedLocation.lat,
         selectedLocation.lng
       );
-      console.log(distance);
-      const distanceToKm: string = convertDistance(distance); 
+      const distanceToKm: string = convertDistance(distance);
       if (!isNaN(parseFloat(distanceToKm))) {
         const distanceInKm: number = parseFloat(distanceToKm);
-        if (distanceInKm > 0.03) { 
-          setCheckIsDistance(true);
+        console.log(distanceInKm);
+        if (distanceInKm < 0.05) { 
+          checkIsDistance.current = true;
         } else {
-          setCheckIsDistance(false);
+          checkIsDistance.current = false;
         }
-        setDistance(distanceToKm);
-      } else {
-        console.error('Distance is not a valid number.'); 
       }
+      setDistance(distanceToKm);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [positionCurrent ,selectedLocation]);
+  }, [positionCurrent, selectedLocation]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,16 +74,17 @@ const Detail: React.FC<DropDetailProps> = ({
         console.error("Error:", err);
       }
     };
-    if(wallet.isConnected) {
+    if (wallet.isConnected) {
       fetchData(); 
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedLocation, account?.address]);
+  }, [selectedLocation, account?.address, wallet.isConnected]);
+
+  if (!selectedLocation || !isDrawerVisible) {
+    return null;
+  }
 
   
 
-  console.log(selectedLocation);
-  console.log(distance)
   if (!selectedLocation || !isDrawerVisible) {
     return null;
   }
@@ -139,6 +138,7 @@ const Detail: React.FC<DropDetailProps> = ({
         console.log(err);
     }
 } 
+  console.log(checkIsDistance.current);
   return (
     <>
       
@@ -184,7 +184,7 @@ const Detail: React.FC<DropDetailProps> = ({
               {wallet.isConnected ? (
                 checkIsCollected ? (
                   <Button disabled>Collected</Button>
-                ) : checkIsDistance ? (
+                ) : checkIsDistance.current ? (
                   <Button className='w-[30%]' onClick={handleTransaction}>
                     Collect
                   </Button>
